@@ -119,15 +119,15 @@
             style="color:orange;"></span></a>
       </nav>
     </div>
+
+    <head>
+      <meta charset="utf-8">
+      {% unless page.no_latex %}
+      {% include latex.html %}
+      {% endunless %}
+    </head>
   </header>
 
-  <head>
-    <meta charset="utf-8">
-    ...
 
-    {% unless page.no_latex %}
-    {% include latex.html %}
-    {% endunless %}
-  </head>
   <!-- / header -->
   <!-- / header -->
