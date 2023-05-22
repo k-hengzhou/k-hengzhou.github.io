@@ -7,7 +7,7 @@ keywords: keyword1, keyword2
 mermaid: false
 sequence: false
 flow: false
-mathjax: false
+mathjax: true
 mindmap: false
 mindmap2: false
 ---
