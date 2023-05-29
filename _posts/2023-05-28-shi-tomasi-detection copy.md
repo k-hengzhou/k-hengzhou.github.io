@@ -1,31 +1,10 @@
 ---
 layout: post
-title: "fast角点和shi-tomasi 特征点"
-categories: vo
-description: "vslam 中常见的fast角点shi-tomasi 特征点介绍"
-keywords: vo, vslam, fast
+title: "shi-tomasi 特征点"
+categories: cv
+description: "vslam 中常见的shi-tomasi 特征点介绍"
+keywords: vo, vslam, shi-tomasi
 ---
-## fast 角点
-### fast 角点提取
-
-- 对于像素p，假设灰度为$I_p$
-- 设置一个阈值T
-- 设置p为中心，选取周围的$N_1$个像素点
-- 假如选取的圆上有连续N$_2$个点的亮度同时大于$I_p+T$或同时小于$I_p-T$,那么像素就认为是关键点 (如果$N_1=16$,$N_2=12$,即FAST-12,$N_1=16$,$N_2=9$,即FAST-9)
-
-<img src="/images/post/fast_tezheng.jpg" width="50%" alt="fast" />
-
-### 非最大值抑制(opencv)
-
-- 计算fast特征点与周围$N_1$各像素点的得分$s=\max_{i=1\dots N_2}(I(i)-I_p)$
-- 对比$3\times 3$像素方格
-- 保留$s$最高的点。
-
-###  最小值抑制(svo::fase)
-
-- 计算fast特征点与周围满足阈值的连续的$N_3$各像素点的得分$s=\min_{i=1\dots N_2}(I(i)-I_p)$
-- 对比$3\times 3$像素方格。
-- 保留得分最高的点
  
 ## shi-tomasi 
 
@@ -141,9 +120,4 @@ $$\begin{equation}
 - 计算fast角点的shi-tamasi得分，即$M$的最小特征值
 - 只保留相同方格内shi-tamasi得分最大且大于fast角点得分的角点
 
-### orb 特征点提取
-
-- 提取fast角点 
-- 灰度质心计算：$\theta=\arctan(m_{01}/m_{10})$,其中$m_{ij}=\sum_{x_i,y_i\in B(x,y)}x^iy^jI(x_i,y_i)$
-- 计算描述子：计算像素点附近随机的128各像素对的大小关系
 

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 归档
-description: 按年份归档
+description: 按月份归档
 keywords: 归档
 comments: false
 menu: 归档
@@ -11,8 +11,8 @@ permalink: /archives/
 <section class="container posts-content">
 {% assign count = 1 %}
 {% for post in site.posts reversed %}
-    {% assign year = post.date | date: '%Y' %}
-    {% assign nyear = post.next.date | date: '%Y' %}
+    {% assign year = post.date | date: '%m' %}
+    {% assign nyear = post.next.date | date: '%m' %}
     {% if year != nyear %}
         {% assign count = count | append: ', ' %}
         {% assign counts = counts | append: count %}
@@ -28,13 +28,13 @@ permalink: /archives/
 {% assign thisyear = 1 %}
 
 {% for post in site.posts %}
-    {% assign year = post.date | date: '%Y' %}
-    {% assign nyear = post.next.date | date: '%Y' %}
+    {% assign year = post.date | date: '%m' %}
+    {% assign nyear = post.next.date | date: '%m' %}
     {% if year != nyear %}
         {% if thisyear != 1 %}
             </ol>
         {% endif %}
-<h3>{{ post.date | date: '%Y' }} ({{ counts[i] }})</h3>
+<h3>{{ post.date | date: '%Y-%m' }} ({{ counts[i] }})</h3>
         {% if thisyear != 0 %}
             {% assign thisyear = 0 %}
         {% endif %}
