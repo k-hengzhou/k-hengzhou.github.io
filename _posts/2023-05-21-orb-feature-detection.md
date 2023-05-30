@@ -3,7 +3,7 @@ layout: post
 title: "orb特征点"
 categories: cv
 description: "vslam 中常见的fast角点shi-tomasi 特征点介绍"
-keyword: vo vslam fast
+keywords: vo vslam fast
 ---
 ## fast 角点
 ### fast 角点提取
