@@ -3,7 +3,7 @@ layout: post
 title: template page
 categories: [cate1, cate2]
 description: some word here
-tags: keyword1, keyword2
+keyword: keyword1, keyword2
 mermaid: false
 sequence: false
 flow: false
