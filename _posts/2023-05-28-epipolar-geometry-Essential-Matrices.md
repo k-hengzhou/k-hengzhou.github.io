@@ -3,7 +3,7 @@ layout: post
 title: "本质矩阵"
 categories: epipolar-geometry
 description: "对极几何基本原理"
-keywords: vo, vslam, epipolar geometry，Essential Matrix Homography
+tags: vo vslam epipolar-geometr Essential-Matrix 
 ---
 
 ## 本质矩阵 
