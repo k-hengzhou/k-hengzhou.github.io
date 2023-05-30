@@ -3,7 +3,7 @@ layout: post
 title: "shi-tomasi 特征点"
 categories: cv
 description: "vslam 中常见的shi-tomasi 特征点介绍"
-keyword: vo vslam shi-tomasi
+keywords: vo vslam shi-tomasi
 ---
  
 ## shi-tomasi 
