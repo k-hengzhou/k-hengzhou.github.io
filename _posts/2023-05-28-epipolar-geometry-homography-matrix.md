@@ -3,7 +3,7 @@ layout: post
 title: "单应矩阵"
 categories: epipolar-geometry
 description: "对极几何基本原理"
-keyword: 
+keywords: 
     - vo
     - vslame
     - pipolar geometry
