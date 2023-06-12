@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "单应矩阵"
-categories: epipolar-geometry
+categories: 多视图几何
 description: "对极几何基本原理"
 keywords: 
     - vo
