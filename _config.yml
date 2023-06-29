@@ -18,7 +18,7 @@ repository: k-hengzhou/k-hengzhou.github.io
 
 cdn:
     jsdelivr:
-        enabled: true
+        enabled: false
 # 可选组件配置
 components:
     # 分享
