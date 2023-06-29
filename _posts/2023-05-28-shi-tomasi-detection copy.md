@@ -3,9 +3,11 @@ layout: post
 title: "shi-tomasi 特征点"
 categories: cv
 description: "vslam 中常见的shi-tomasi 特征点介绍"
-keywords: vo vslam shi-tomasi
+keywords:  shi-tomasi harri svo_slam
 ---
- 
+
+本文推到shi-tomasi角点的计算原理，给出harri判断的条件，并说明svo slam 的特征提取方法
+
 ## shi-tomasi 
 
 对于图像的灰度函数为$I(x,y)$,对于图像中的一点$(x,y)$,$B(x,y)$为已该点为中心的一个方形像素块。
@@ -111,9 +113,9 @@ $$\begin{equation}
    E_{uv}(x,y)=\sum_{(x_i,y_i)\in B(x_i,y_i)}w(x,y)[I(x_i+u,y_i+v)-I(x_i,y_i)]^2
 \end{equation}$$
 
-## svo 和orb 特征点 
 
-### svo特征值提取
+
+## svo特征值提取
 
 - 将图像划分为面积相等的小方格
 - 提取fast角点，并计算角点得分和最小值抑制

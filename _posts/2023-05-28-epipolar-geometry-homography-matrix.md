@@ -1,15 +1,14 @@
 ---
 layout: post
 title: "单应矩阵"
-categories: 多视图几何
+categories: 视图几何
 description: "对极几何基本原理"
 keywords: 
-    - vo
-    - vslame
-    - pipolar geometry
-    - Homography Matrix
----
+    - 对极几何
+    - 单应矩阵
 
+---
+本文先通过特征点匹配关系给出单应矩阵的定义，并完整的推到如何求解单应矩阵，最后给出通过单应矩阵还原旋转矩阵和位移向量的数学原理
 
 ## 单应矩阵
 
@@ -60,32 +59,7 @@ $$
 
 令$A=Rd+tn^t$,且$H=K(R-tn^t/d)K^{-1}$
 
-### 恢复R、t
-取
 
-$$
-A=Rd+tn^t
-$$
-
-对A进行SVD分解得
-
-$$ 
-V \Sigma U=Rd+tn^t
-$$
-
-整理得
-
-$$
-d_{x_2}x_2=d_{x_1}(R-tn^t/d)x_1
-$$
-
-等式两边都叉乘$x_2$可得
-
-$$
-0=x_2\times (R-tn^t/d)x_1
-$$
-
-令$A=Rd+tn^t$,且$H=K(R-tn^t/d)K^{-1}$
 
 ### 恢复R、t
 取

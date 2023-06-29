@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "本质矩阵"
-categories: 多视图几何
+title: "本质矩阵和基础矩阵"
+categories: 视图几何
 description: "对极几何基本原理"
-keywords: vo vslam epipolar-geometr Essential-Matrix 
+keywords: 对极几何 本质矩阵 基础矩阵 
 ---
+
+本文先通过特征点匹配关系给出本质矩阵和基础矩阵的定义，并完整的推到如何求解本质矩阵和基础矩阵，最后给出通过这两个矩阵还原旋转矩阵和位移向量的数学原理
 
 ## 本质矩阵 
 ### $E$的定义

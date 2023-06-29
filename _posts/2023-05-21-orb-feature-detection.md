@@ -2,9 +2,12 @@
 layout: post
 title: "orb特征点"
 categories: cv
-description: "vslam 中常见的fast角点shi-tomasi 特征点介绍"
-keywords: vo vslam fast
+description: "orb slam 中orb角点的提取和匹配"
+keywords:   fast角点 orb特征点 BRIEF描述子  灰度质心定义 特征匹配
 ---
+
+本文介绍orb_slam 特征提取和特征匹配的基本算法。包含：fast角点的提取，BRIEF描述子，灰度质心定义，汉明距离距离匹配和角度选择
+
 ## fast 角点
 ### fast 角点提取
 
@@ -91,5 +94,7 @@ $$
 \hat{x}_1^m=\arg\min_{x_2^n}H(x_1^m,x_2^n)
 $$
 
+#### 角度验证
 
+使用直方图统计所有匹配点之间的角度差，去除那些角度差不在前三高频区间的匹配点。
 
