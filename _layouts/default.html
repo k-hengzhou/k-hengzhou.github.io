@@ -7,6 +7,7 @@ layout: compress
 {% assign assets_base_url = "https://cdn.jsdelivr.net/gh/" | append: site.repository | append: '@master' %}
 {% endif %}
 {% assign assets_images_url = '<img src="' | append: site.url | append: "/images" %}
+{% seo %}
 {% include header.html %}
     {{ content | replace: '<img src="/images', assets_images_url }}
 {% include footer.html %}
