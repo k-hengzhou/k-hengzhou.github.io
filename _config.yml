@@ -155,9 +155,9 @@ comments_provider: giscus
 #giscus 配置参考：https://giscus.app/zh-CN
 giscus:
     repo: k-hengzhou/k-hengzhou.github.io
-    repo-id: R_kgDOJlX4TQ
+    repo-id: R_kgDOJl4e2w
     category: Announcements
-    category-id: DIC_kwDOJlX4Tc4CWoEP
+    category-id: DIC_kwDOJl4e284CXxkO
 # 在使用其它评论组件时可点击显示 Disqus
 # lazy_load_disqus : false
 
