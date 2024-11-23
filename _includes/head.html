@@ -109,3 +109,9 @@
 
   {% include metadata-hook.html %}
 </head>
+<head>
+  <meta charset="utf-8">
+  {% unless page.no_latex %}
+  {% include latex.html %}
+  {% endunless %}
+</head>
