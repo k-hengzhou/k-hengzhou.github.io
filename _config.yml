@@ -18,7 +18,7 @@ title: k-hz # the main title
 
 tagline: 你可以在这里发现有意思的数学 # it will display as the sub-title
 
-description: >- # used by seo meta and the atom feed
+description: 
   一个数学爱好者的分享知识的网站
 
 # Fill in the protocol & hostname for your site.
@@ -86,7 +86,7 @@ social_preview_image: "favicon.ico"
 toc: true
 
 comments:
-  active: # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
+  active: giscus # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
   # The active options are as follows:
   disqus:
     shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
@@ -202,3 +202,13 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+gem: 
+  - jekyll-archives
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate-v2
+  - kramdown-parser-gfm
+  - kramdown
+  - jekyll-redirect-from
+  - jekyll-mermaid
