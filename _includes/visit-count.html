@@ -1,0 +1,23 @@
+<!-- GoatCounter访问统计 -->
+<span class="visit-count" data-path="{{ page.url }}">
+  <i class="far fa-eye fa-fw me-1"></i>
+  <span class="count">加载中...</span>
+</span>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const counters = document.querySelectorAll('.visit-count');
+
+    counters.forEach((counter) => {
+      const path = counter.dataset.path;
+      fetch(`https://${site.goatcounter.id}.goatcounter.com/counter/${encodeURIComponent(path)}.json`)
+        .then((response) => response.json())
+        .then((data) => {
+          counter.querySelector('.count').textContent = data.count || '0';
+        })
+        .catch(() => {
+          counter.querySelector('.count').textContent = 'N/A';
+        });
+    });
+  });
+</script>

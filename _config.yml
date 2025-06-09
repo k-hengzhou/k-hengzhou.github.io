@@ -18,8 +18,7 @@ title: k-hz # the main title
 
 tagline: 你可以在这里发现有意思的数学 # it will display as the sub-title
 
-description: 
-  一个数学爱好者的分享知识的网站
+description: 一个数学爱好者的分享知识的网站
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -53,7 +52,7 @@ google_analytics:
   id: # fill in your Google Analytics ID
 
 goatcounter:
-  id: # fill in your Goatcounter ID
+  id: https://khz.goatcounter.com/
 
 # Prefer color scheme setting.
 #
@@ -202,7 +201,7 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
-gem: 
+gem:
   - jekyll-archives
   - jekyll-seo-tag
   - jekyll-sitemap
