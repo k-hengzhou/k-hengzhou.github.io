@@ -1,22 +1,55 @@
 <!-- GoatCounter访问统计 -->
 <span class="visit-count" data-path="{{ page.url }}">
   <i class="far fa-eye fa-fw me-1"></i>
-  <span class="count">加载中...</span>
+  <span class="count">0</span>
 </span>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    // 检查是否配置了GoatCounter
+    const goatcounterId = '{{ site.goatcounter.id }}';
+    if (!goatcounterId || goatcounterId.trim() === '') {
+      console.log('GoatCounter未配置');
+      return;
+    }
+
     const counters = document.querySelectorAll('.visit-count');
+    if (counters.length === 0) return;
 
     counters.forEach((counter) => {
       const path = counter.dataset.path;
-      fetch(`https://${site.goatcounter.id}.goatcounter.com/counter/${encodeURIComponent(path)}.json`)
-        .then((response) => response.json())
-        .then((data) => {
-          counter.querySelector('.count').textContent = data.count || '0';
+      // 从配置中获取GoatCounter域名，移除https://前缀
+      const goatcounterDomain = goatcounterId.replace('https://', '').replace('http://', '');
+
+      // 确保路径不为空
+      const apiPath = path || '/';
+
+      // 设置超时，避免长时间等待
+      const timeout = 5000; // 5秒超时
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+      fetch(`https://${goatcounterDomain}/counter/${encodeURIComponent(apiPath)}.json`, {
+        signal: controller.signal
+      })
+        .then((response) => {
+          clearTimeout(timeoutId);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
         })
-        .catch(() => {
-          counter.querySelector('.count').textContent = 'N/A';
+        .then((data) => {
+          if (data && typeof data.count !== 'undefined') {
+            counter.querySelector('.count').textContent = data.count.toString();
+          } else {
+            counter.querySelector('.count').textContent = '0';
+          }
+        })
+        .catch((error) => {
+          clearTimeout(timeoutId);
+          console.log('GoatCounter API错误:', error.message);
+          // 保持显示默认值0，不显示错误信息
         });
     });
   });
