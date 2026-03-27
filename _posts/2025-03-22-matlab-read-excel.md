@@ -188,19 +188,294 @@ opts.SelectedVariableNames = {'Column1', 'Column3', 'Column5'};
 T = readtable('data.xlsx', opts);
 ```
 
-### 4️⃣ 处理日期和时间
+## 📋 如何使用 readtable 读取到的数据
+
+`readtable` 函数返回的是 MATLAB 的表格（table）数据类型，这种数据类型提供了丰富的数据操作方法。下面详细介绍如何使用读取到的表格数据：
+
+### 1️⃣ 访问表格数据
+
+#### 基本访问方法
 
 ```matlab
-% 读取日期数据
-T = readtable('data.xlsx', 'DateLocale', 'zh_CN');
+% 假设已读取数据
+T = readtable('data.xlsx');
 
-% 指定日期格式
-opts = detectImportOptions('data.xlsx');
-opts = setvaropts(opts, 'DateColumn', 'InputFormat', 'yyyy-MM-dd');
-T = readtable('data.xlsx', opts);
+% 方法1：使用点号访问列（列名作为变量名）
+% 如果列名是有效的 MATLAB 变量名（如 'Height', 'Weight'）
+height_data = T.Height;
+weight_data = T.Weight;
 
-% 转换日期格式
-T.DateColumn = datetime(T.DateColumn, 'InputFormat', 'dd/MM/yyyy');
+% 方法2：使用花括号访问单元格数据
+% 返回单元格数组，适合混合数据类型
+cell_data = T{:, 'Height'};
+
+% 方法3：使用圆括号访问子表格
+% 返回表格类型，保持列名
+sub_table = T(:, {'Name', 'Age', 'Height'});
+
+% 方法4：使用索引访问特定元素
+% 访问第3行第2列的数据
+specific_value = T{3, 2};
+
+% 方法5：使用逻辑索引
+% 选择年龄大于30的所有行
+adults = T(T.Age > 30, :);
+```
+
+#### 处理中文列名
+
+```matlab
+% 读取时保留中文列名
+T = readtable('data.xlsx', 'VariableNamingRule', 'preserve');
+
+% 访问中文列名需要使用字符串索引
+% 方法1：使用点号和字符串
+math_point = T.("数学");
+
+% 方法2：使用花括号和字符串索引
+physics_point = T{:, "物理"};
+
+% 方法3：使用变量名函数
+col_names = T.Properties.VariableNames;
+disp('所有列名：');
+disp(col_names);
+
+% 检查特定列是否存在
+if ismember("化学", col_names)
+    chemistry_point = T.("化学");
+end
+```
+
+### 2️⃣ 表格基本操作
+
+#### 查看表格信息
+
+```matlab
+% 显示表格基本信息
+disp('表格基本信息：');
+disp(T);
+
+% 查看表格维度
+[num_rows, num_cols] = size(T);
+fprintf('表格有 %d 行，%d 列\n', num_rows, num_cols);
+
+% 查看列名
+col_names = T.Properties.VariableNames;
+disp('列名：');
+disp(col_names);
+
+% 查看变量类型
+var_types = varfun(@class, T, 'OutputFormat', 'cell');
+disp('各列数据类型：');
+for i = 1:length(col_names)
+    fprintf('%s: %s\n', col_names{i}, var_types{i});
+end
+
+% 查看前几行数据
+head(T, 5)  % 显示前5行
+
+% 查看后几行数据
+tail(T, 3)  % 显示后3行
+
+% 查看摘要统计
+summary(T)
+```
+
+#### 添加和删除列
+
+```matlab
+% 添加新列（计算BMI示例）
+T.BMI = T.Weight ./ (T.Height/100).^2;
+
+% 添加计算列（带条件）
+T.BMI_Category = strings(height(T), 1);
+T.BMI_Category(T.BMI < 18.5) = "偏瘦";
+T.BMI_Category(T.BMI >= 18.5 & T.BMI < 24) = "正常";
+T.BMI_Category(T.BMI >= 24 & T.BMI < 28) = "超重";
+T.BMI_Category(T.BMI >= 28) = "肥胖";
+
+% 删除列
+T.Weight = [];  % 删除Weight列
+
+% 或者使用removevars函数
+T = removevars(T, {'Height', 'BMI'});
+
+% 重命名列
+T.Properties.VariableNames{'Age'} = '年龄';
+T.Properties.VariableNames{strcmp(T.Properties.VariableNames, 'Name')} = '姓名';
+```
+
+### 3️⃣ 数据筛选和排序
+
+#### 数据筛选
+
+```matlab
+% 基于条件的筛选
+% 筛选年龄大于25且性别为'男'的记录
+male_adults = T(T.Age > 25 & strcmp(T.Gender, '男'), :);
+
+% 使用findgroups进行分组筛选
+T = readtable('student.xlsx', 'VariableNamingRule', 'preserve',"Sheet","Sheet2")
+%根据性别进行分组
+[G, groups] = findgroups(T.("性别"));
+%计算每组的平均分
+group_stats = splitapply(@mean, T.("总分"), G);
+disp(groups)
+disp(group_stats)
+
+% 筛选特定值
+% 选择部门为'销售部'或'市场部'的员工
+sales_market = T(ismember(T.Department, {'销售部', '市场部'}), :);
+
+% 使用contains进行模糊匹配
+% 选择姓名中包含'张'的员工
+zhang_employees = T(contains(T.Name, '张'), :);
+```
+
+#### 数据排序
+
+```matlab
+% 单列排序
+% 按年龄升序排序
+T_sorted = sortrows(T, 'Age');
+
+% 按年龄降序排序
+T_sorted = sortrows(T, 'Age', 'descend');
+
+% 多列排序
+% 先按部门排序，部门相同按工资降序排序
+T_sorted = sortrows(T, {'Department', 'Salary'}, {'ascend', 'descend'});
+
+% 自定义排序顺序
+% 定义部门优先级
+dept_order = {'管理部', '技术部', '销售部', '市场部', '财务部'};
+[~, dept_idx] = ismember(T.Department, dept_order);
+T.DeptOrder = dept_idx;
+T_sorted = sortrows(T, 'DeptOrder');
+T.DeptOrder = [];  % 删除临时列
+```
+
+### 6️⃣ 表格数据可视化
+
+#### 基本统计可视化
+
+```matlab
+% 创建图形窗口
+figure('Position', [100, 100, 1200, 800]);
+
+% 子图1：箱线图比较不同部门的工资分布
+subplot(2, 2, 1);
+boxchart(categorical(T.Department), T.Salary);
+title('各部门工资分布箱线图');
+xlabel('部门');
+ylabel('工资');
+grid on;
+
+% 子图2：散点图（年龄 vs 工资）
+subplot(2, 2, 2);
+scatter(T.Age, T.Salary, 50, 'filled');
+xlabel('年龄');
+ylabel('工资');
+title('年龄与工资关系');
+grid on;
+
+% 添加颜色表示性别
+hold on;
+gscatter(T.Age, T.Salary, T.Gender);
+hold off;
+
+% 子图3：直方图（工资分布）
+subplot(2, 2, 3);
+histogram(T.Salary, 20);
+xlabel('工资');
+ylabel('频数');
+title('工资分布直方图');
+grid on;
+
+% 子图4：饼图（部门人数比例）
+subplot(2, 2, 4);
+dept_counts = groupsummary(T, 'Department', 'numel', 'Salary');
+pie(dept_counts.numel_Salary, dept_counts.Department);
+title('各部门人数比例');
+```
+
+#### 高级可视化
+
+```matlab
+% 热力图：部门-性别平均工资
+figure('Position', [100, 100, 800, 600]);
+pivot_data = unstack(T(:, {'Department', 'Gender', 'Salary'}), ...
+                    'Salary', 'Gender', 'AggregationFunction', @mean);
+heatmap_data = table2array(pivot_data(:, 2:end));
+heatmap(categorical(pivot_data.Department), {'男', '女'}, heatmap_data);
+title('各部门性别平均工资热力图');
+colormap('parula');
+colorbar;
+
+% 分组条形图
+figure('Position', [100, 100, 1000, 600]);
+dept_gender_stats = groupsummary(T, {'Department', 'Gender'}, 'mean', 'Salary');
+bar_data = unstack(dept_gender_stats(:, {'Department', 'Gender', 'mean_Salary'}), ...
+                  'mean_Salary', 'Gender');
+bar(table2array(bar_data(:, 2:end)), 'grouped');
+set(gca, 'XTickLabel', bar_data.Department);
+legend({'男', '女'}, 'Location', 'best');
+xlabel('部门');
+ylabel('平均工资');
+title('各部门男女平均工资对比');
+grid on;
+```
+
+### 7️⃣ 数据导出和保存
+
+#### 导出到不同格式
+
+```matlab
+% 保存为Excel文件
+output_file = 'processed_data.xlsx';
+writetable(T, output_file, 'Sheet', '处理后的数据');
+
+% 保存为CSV文件
+writetable(T, 'data_processed.csv');
+
+% 保存为MAT文件（MATLAB专用，加载速度快）
+save('data_table.mat', 'T');
+
+% 保存特定列到新文件
+selected_cols = T(:, {'Name', 'Department', 'Salary'});
+writetable(selected_cols, 'employee_info.xlsx');
+
+% 添加格式说明
+metadata = table({'数据说明：员工信息表'}, {'生成时间：' + string(datetime('now'))}, ...
+                {'数据行数：' + string(height(T))}, ...
+                'VariableNames', {'说明1', '说明2', '说明3'});
+writetable(metadata, output_file, 'Sheet', '说明', 'WriteMode', 'overwritesheet');
+```
+
+### 8️⃣ 性能优化技巧
+
+```matlab
+% 1. 使用适当的数据类型
+% 将字符串转换为分类数据可以节省内存
+T.Department = categorical(T.Department);
+T.Gender = categorical(T.Gender);
+
+% 2. 避免在循环中频繁访问表格
+% 不好的做法：
+% for i = 1:height(T)
+%     value = T.Value(i);  % 每次访问都开销
+% end
+
+% 好的做法：
+values = T.Value;  % 一次性提取到数组
+for i = 1:length(values)
+    value = values(i);  % 访问数组，速度快
+end
+
+% 3. 使用向量化操作代替循环
+% 计算每行的总分（假设有多个分数列）
+score_cols = {'Math', 'Physics', 'Chemistry'};
+T.TotalScore = sum(T{:, score_cols}, 2);
 ```
 
 ## 📊 实战案例：学生成绩分析

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://k-hengzhou.github.io/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/tags/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/archives/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/about/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/Ai-matlab-math-modeling/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/MATLAB-Basic-Syntax/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/matlab-read-excel/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/epipolargeometryEssentialMatrices/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/epipolargeometry-homographymatrix/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/se3/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/imggradients/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/shitomasidetection-copy/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/orbfeaturedetection/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/camerageometry/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/page2/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/liegroup/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/ai/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/cv/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/matlab/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/excel/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/posts/LKflow/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://k-hengzhou.github.io/categories/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
+  <lastmod>2026-03-27T21:22:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
