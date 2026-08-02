@@ -111,6 +111,14 @@ blockquote {
   @include prompt('info', '\f06a');
   @include prompt('warning', '\f06a');
   @include prompt('danger', '\f071');
+  @include prompt('note', '\f05a');
+  @include prompt('important', '\f06a');
+  @include prompt('success', '\f058');
+  @include prompt('question', '\f059');
+  @include prompt('example', '\f121');
+  @include prompt('caution', '\f071');
+  @include prompt('failure', '\f057');
+  @include prompt('bug', '\f188');
 }
 
 kbd {

@@ -69,8 +69,8 @@
   --btn-share-hover-color: #bfc1ca;
   --card-bg: #1e1e1e;
   --card-hovor-bg: #464d51;
-  --card-shadow: rgb(21, 21, 21, 0.72) 0 6px 18px 0,
-    rgb(137, 135, 135, 0.24) 0 0 0 1px;
+  --card-shadow:
+    rgb(21, 21, 21, 0.72) 0 6px 18px 0, rgb(137, 135, 135, 0.24) 0 0 0 1px;
   --kbd-wrap-color: #6a6a6a;
   --kbd-text-color: #d3d3d3;
   --kbd-bg-color: #242424;
@@ -83,6 +83,22 @@
   --prompt-warning-icon-color: rgb(255, 165, 0, 0.8);
   --prompt-danger-bg: rgb(86, 28, 8, 0.8);
   --prompt-danger-icon-color: #cd0202;
+  --prompt-note-bg: rgb(7, 59, 104, 0.8);
+  --prompt-note-icon-color: #0075d1;
+  --prompt-important-bg: rgb(60, 40, 90, 0.8);
+  --prompt-important-icon-color: #a371f7;
+  --prompt-success-bg: rgb(22, 60, 36, 0.64);
+  --prompt-success-icon-color: rgb(15, 164, 15, 0.81);
+  --prompt-question-bg: rgb(7, 59, 104, 0.8);
+  --prompt-question-icon-color: #0075d1;
+  --prompt-example-bg: rgb(60, 40, 90, 0.8);
+  --prompt-example-icon-color: #a371f7;
+  --prompt-caution-bg: rgb(90, 69, 3, 0.88);
+  --prompt-caution-icon-color: rgb(255, 165, 0, 0.8);
+  --prompt-failure-bg: rgb(86, 28, 8, 0.8);
+  --prompt-failure-icon-color: #cd0202;
+  --prompt-bug-bg: rgb(86, 28, 8, 0.8);
+  --prompt-bug-icon-color: #cd0202;
 
   /* tags */
   --tag-border: rgb(59, 79, 88);
