@@ -2,6 +2,7 @@
 layout: post
 title: "shi-tomasi 特征点"
 categories: cv
+tags: [cv, 角点检测]
 description: "vslam 中常见的shi-tomasi 特征点介绍"
 keywords:  shi-tomasi harri svo_slam
 ---

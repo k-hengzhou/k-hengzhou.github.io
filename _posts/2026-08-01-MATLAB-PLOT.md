@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "MATLAB 绘图基础"
-categories: matlab 编程 基础语法
+categories: matlab
+tags: [MATLAB, 绘图]
 description: "本文将详细介绍 MATLAB 中的绘图功能，包括基本绘图、曲线样式定制、图形标注与坐标轴控制、常用数据图（条形图、散点图、茎叶图、饼图、直方图、误差棒图、箱线图等）、子图布局与图形保存导出等，帮助你系统掌握 MATLAB 数据可视化"
 keywords: matlab, 绘图, plot, 数据可视化, 子图, 条形图, 散点图, 茎叶图, 饼图, 直方图, 箱线图, tiledlayout, 保存
 mermaid: false
@@ -15,43 +16,6 @@ mindmap2: false
 # 📈 MATLAB 绘图基础
 
 > 绘图是 MATLAB 最强大的功能之一，掌握 `plot`、`bar`、`scatter` 等绘图命令，是 MATLAB 数据可视化与工程分析中不可或缺的一步。
-
----
-
-## 📑 目录
-
-> 本文内容导航（可快速了解文章结构）：
-
-1. 🖌️ **二维曲线绘图** —— `plot` 系列命令
-   - 📝 基本绘图
-   - 🏷️ 添加标题、标签、网格线和缩放
-   - 📊 在同一图形上绘制多个函数
-   - 🔀 hold on 与 hold off
-   - 🪟 figure 多窗口绘图
-   - 🪟 clf 与 close 图形窗口控制
-   - 📈 双 y 轴绘图
-2. 🎨 **图形样式与标注** —— 曲线样式、坐标轴与文字标注
-   - 🎨 设置颜色、线型与标记
-   - 🎨 自定义颜色（RGB）
-   - 📏 设置线宽、标记大小与字体
-   - 📐 设定轴比例
-   - 📐 坐标轴刻度自定义
-   - 📝 text 文字标注
-   - 🔑 legend 进阶用法
-3. 📊 **常用数据图** —— 条形图、散点图、茎叶图与饼图
-   - 📊 绘制条形图
-   - 🔵 scatter 散点图
-   - 🌱 stem 茎叶图
-   - 🍕 饼图
-   - 📊 直方图
-   - 📏 误差棒图
-   - 📦 箱线图
-4. 🧩 **子图与布局** —— 多子图绘制
-   - 🧩 生成子图（subplot）
-   - 🧱 tiledlayout 布局子图
-5. 💾 **保存与进阶技巧** —— 导出图形与坐标轴设置
-   - 💾 图形保存与导出
-   - ⚙️ set(gca) 坐标轴属性设置
 
 ---
 
@@ -76,7 +40,7 @@ plot(x, y)
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot1.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot1.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 再看一个绘制抛物线（二次函数曲线）的例子：
 
@@ -88,7 +52,7 @@ plot(x, y)
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot2.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot2.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：当函数表达式中含有乘方、乘法、除法等运算时，必须使用点运算符（如 `x.^2`、`.*`、`./`）进行元素级运算，才能得到与向量 `x` 同维度的结果。
 
@@ -107,7 +71,7 @@ axis equal     % 命令生成一个正方形图
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot3.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot3.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`xlabel`、`ylabel`、`title` 等命令既可以使用逗号与 `plot` 写在同一行（如上例），也可以分行书写，二者效果完全相同。若不再需要网格，可使用 `grid off` 关闭。
 
@@ -124,7 +88,7 @@ plot(x, y, x, g), legend('Sin(x)', 'Cos(x)')
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot4.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot4.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 ### 🔀 hold on 与 hold off
 
@@ -146,7 +110,7 @@ legend('sin(x)', 'cos(x)', 'sin+cos')
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot5.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot5.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`hold on` 与一次传入多组数据（如 `plot(x, y1, x, y2)`）效果相同，但 `hold on` 更适合需要分步计算、动态添加曲线或叠加不同坐标系图形的场景。
 
@@ -169,37 +133,13 @@ figure(1)                 % 切换回窗口 1
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot6.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot6.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`close all` 可以一次性关闭所有图形窗口，`close(1)` 只关闭编号为 1 的窗口。
 
 ### 🪟 clf 与 close 图形窗口控制
 
 `clf` 命令用于**清空**当前图形窗口中的所有内容（包括坐标轴、曲线、标注等），但窗口本身保持打开；`close` 命令则用于**关闭**图形窗口。两者常配合 `figure` 使用，用于管理多个图形窗口。
-
-```matlab
-x = 0:0.01:10;
-y = sin(x);
-plot(x, y), title('Sin(x)')     % 绘制正弦曲线
-
-clf                             % 清空当前图形窗口（窗口仍打开）
-plot(x, cos(x)), title('Cos(x)')  % 重新绘制余弦曲线
-
-close                           % 关闭当前图形窗口
-```
-
-> **💻 运行结果**
->
-> ```
-> >> x = 0:0.01:10;
-> >> y = sin(x);
-> >> plot(x, y), title('Sin(x)')
-> >> clf
-> >> plot(x, cos(x)), title('Cos(x)')
-> >> close
-> ```
->
-> `clf` 清空窗口后重新绘制余弦曲线，`close` 关闭当前窗口。
 
 > **💡 提示**：三者的区别——`clf` **清空不关闭**窗口，`close` **关闭**当前窗口，`close all` **关闭所有**窗口。
 
@@ -219,19 +159,9 @@ yyaxis right              % 激活右侧 y 轴
 plot(x, y2), ylabel('100*exp(-x)')
 ```
 
-> **💻 运行结果**
->
-> ```
-> >> x = 0:0.01:10;
-> >> y1 = sin(x);
-> >> y2 = 100*exp(-x);
-> >> yyaxis left
-> >> plot(x, y1), ylabel('sin(x)')
-> >> yyaxis right
-> >> plot(x, y2), ylabel('100*exp(-x)')
-> ```
->
-> 正弦曲线使用左侧 y 轴，指数衰减曲线使用右侧 y 轴，两条曲线互不干扰。
+**运行结果**
+
+<img src="/images/post/matlab_plot/plot_yy.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`yyaxis left` 与 `yyaxis right` 分别激活左右两个 y 轴；使用 `yyaxis left` 切换回左侧后，可以继续添加左侧曲线。双 y 轴非常适合温度与压力、销量与增长率等不同量纲数据的对比展示。
 
@@ -267,7 +197,7 @@ plot(x, y, 'r', x, g, 'g')
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot7.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot7.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 除了颜色，`plot` 还支持通过**线型（LineStyle）**和**标记（Marker）**来定制曲线样式：
 
@@ -289,7 +219,7 @@ plot(x, y1, 'r--o', x, y2, 'b:^')   % 红色虚线+圆圈，蓝色点线+上三�
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot8.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot8.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：颜色、线型和标记可以任意组合成一行字符串，如 `'r--o'` 表示**红色虚线加圆形标记**；`'b:'` 表示**蓝色点线**。不指定颜色时，MATLAB 会自动为每条曲线分配不同颜色。
 
@@ -311,15 +241,9 @@ y = sin(x);
 plot(x, y, 'Color', [1 0.5 0], 'LineWidth', 2)   % 橙色曲线
 ```
 
-> **💻 运行结果**
->
-> ```
-> >> x = 0:0.01:2*pi;
-> >> y = sin(x);
-> >> plot(x, y, 'Color', [1 0.5 0], 'LineWidth', 2)
-> ```
->
-> 使用 RGB 三元组 `[1 0.5 0]` 绘制橙色加宽曲线。
+**运行结果**
+
+<img src="/images/post/matlab_plot/plot_color.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：RGB 三元组必须配合名称-值对 `'Color'` 使用（如 `'Color', [r g b]`），不能像颜色字符那样直接写在样式字符串中。常用颜色的 RGB 值可以通过 `colors` 命令查看。
 
@@ -344,7 +268,7 @@ title('正弦曲线', 'FontSize', 16)
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot9.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot9.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`'LineWidth'` 的默认值为 `0.5`，取值范围一般取 `0.5 ~ 3` 即可获得清晰美观的显示效果。
 
@@ -363,7 +287,7 @@ plot(x, y), axis([0 10 -1 1])
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot10.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot10.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：除了 `axis equal` 和 `axis([...])`，还常用 `axis tight` 让坐标轴范围贴合数据范围、`axis on/off` 显示/隐藏坐标轴。
 
@@ -388,18 +312,9 @@ xticklabels({'0', 'π/2', 'π', '3π/2', '2π'})   % 自定义 x 轴刻度标签
 grid on
 ```
 
-> **💻 运行结果**
->
-> ```
-> >> x = 0:0.01:2*pi;
-> >> y = sin(x);
-> >> plot(x, y)
-> >> xticks(0:pi/2:2*pi)
-> >> xticklabels({'0', 'π/2', 'π', '3π/2', '2π'})
-> >> grid on
-> ```
->
-> x 轴刻度被设置为 `0, π/2, π, 3π/2, 2π`，并显示对应的文字标签。
+**运行结果**
+
+<img src="/images/post/matlab_plot/plot13.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`xticks` 与 `yticks` 设置刻度**位置**，`xticklabels` 与 `yticklabels` 设置刻度上的**文字标签**，两者通常配合使用。这也比 `set(gca, 'XTick', ...)` 的写法更加直观易读。
 
@@ -416,7 +331,7 @@ text(pi/2, 1, '最大值点 (π/2, 1)', 'FontSize', 12)   % 在最大值点处�
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot11.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot11.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`annotation` 命令可以创建**相对于整个图形窗口**的箭头、文本框等注释对象，配合 `text` 使用可以制作出效果更好的标注。
 
@@ -438,7 +353,7 @@ legend({'sin(x)', 'cos(x)'}, 'Location', 'northwest', 'FontSize', 12)
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/plot12.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/plot12.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`'Location'` 常用取值还有 `'north'`（顶部居中）、`'southeast'`（右下角）、`'best'`（自动选择最佳位置）等。
 
@@ -461,7 +376,7 @@ bar(x, y), xlabel('Student'), ylabel('Score'), title('First Sem:')
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/bar1.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/bar1.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`close all` 用于关闭所有已打开的图形窗口，避免多个图窗口叠加影响观察。`barh` 可以绘制**水平条形图**。
 
@@ -477,7 +392,7 @@ scatter(x, y, 'filled')
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/scatter1.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/scatter1.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`scatter(x, y, sz, c)` 可以通过 `sz` 控制点的大小、`c` 控制点的颜色，从而在散点图中编码第三维信息。
 
@@ -493,7 +408,7 @@ stem(n, y), xlabel('n'), ylabel('y'), title('Stem Plot')
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/stem1.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/stem1.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`stem` 与 `plot` 的用法类似，也支持颜色、线型、标记等样式设置。
 
@@ -507,7 +422,7 @@ pie([30, 40, 20, 10])       % 饼图（按占比绘图）
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/pie1.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/pie1.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`pie([30, 40, 20, 10])` 的输入无需归一化，MATLAB 会自动按总和计算各扇区占比。
 
@@ -521,15 +436,9 @@ histogram(data, 30)             % 将数据分成 30 个区间
 xlabel('数值'), ylabel('频数'), title('正态分布直方图')
 ```
 
-> **💻 运行结果**
->
-> ```
-> >> data = randn(1, 1000);
-> >> histogram(data, 30)
-> >> xlabel('数值'), ylabel('频数'), title('正态分布直方图')
-> ```
->
-> 显示 1000 个随机数据的直方图，形状近似钟形（正态分布）。
+**运行结果**
+
+<img src="/images/post/matlab_plot/histogram.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`histogram(data, 30)` 的第二个参数指定**区间个数**；也可以传入向量指定区间边界，如 `histogram(data, -4:0.5:4)`。默认情况下直方图显示的是**频数**，添加 `'Normalization', 'probability'` 可以改为显示概率。
 
@@ -544,16 +453,9 @@ e = [0.3, 0.5, 0.4, 0.6, 0.5];      % 误差范围
 errorbar(x, y, e), xlabel('x'), ylabel('y'), title('Error Bar Plot')
 ```
 
-> **💻 运行结果**
->
-> ```
-> >> x = 1:5;
-> >> y = [2.1, 3.4, 4.6, 5.2, 6.8];
-> >> e = [0.3, 0.5, 0.4, 0.6, 0.5];
-> >> errorbar(x, y, e), xlabel('x'), ylabel('y'), title('Error Bar Plot')
-> ```
->
-> 在每个数据点上下绘制误差棒，直观显示测量误差范围。
+**运行结果**
+
+<img src="/images/post/matlab_plot/errorbar.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`errorbar(x, y, e)` 中 `e` 表示对称误差；`errorbar(x, y, neg, pos)` 可以指定**不对称误差**（下方与上方分别不同）。误差棒图常用于展示多次实验的均值±标准差。
 
@@ -566,14 +468,9 @@ data = randn(100, 3);               % 生成 3 组各 100 个正态分布随机�
 boxplot(data), xlabel('组别'), ylabel('数值'), title('Box Plot')
 ```
 
-> **💻 运行结果**
->
-> ```
-> >> data = randn(100, 3);
-> >> boxplot(data), xlabel('组别'), ylabel('数值'), title('Box Plot')
-> ```
->
-> 显示 3 组数据的箱线图，每组包含箱体（四分位范围）与须（数据范围）。
+**运行结果**
+
+<img src="/images/post/matlab_plot/boxplot.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：箱线图中，箱体的上边界是上四分位数（75%）、下边界是下四分位数（25%）、中间红线是中位数，须的长度通常为四分位距的 1.5 倍，超出须的孤立点即为**离群点**。
 
@@ -599,7 +496,7 @@ plot(x, y), xlabel('x'), ylabel('exp(–2x)*sin(10x)'), axis([0 5 -1 1])
 ```
 
 **运行结果**  
- <img src="/images/post/matlab_plot/subplot1.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+ <img src="/images/post/matlab_plot/subplot1.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`subplot(1, 2, 1)` 表示创建 1 行 2 列的子图布局，并激活第 1 个子图；`subplot(1, 2, 2)` 则激活第 2 个子图。
 
@@ -618,18 +515,9 @@ nexttile                   % 激活第 2 个子图
 plot(x, cos(x)), title('cos(x)')
 ```
 
-> **💻 运行结果**
->
-> ```
-> >> x = 0:0.01:5;
-> >> tiledlayout(1, 2)
-> >> nexttile
-> >> plot(x, sin(x)), title('sin(x)')
-> >> nexttile
-> >> plot(x, cos(x)), title('cos(x)')
-> ```
->
-> 使用 `tiledlayout` 创建两个自动对齐的子图。
+**运行结果**
+
+<img src="/images/post/matlab_plot/tilelayout1.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`tiledlayout` 配合 `nexttile` 比 `subplot` 更适合需要**共享轴标签**或**统一坐标范围**的场合。
 
@@ -681,7 +569,7 @@ set(gca, 'XGrid', 'on', 'YGrid', 'on') % 分别打开 x、y 方向网格线
 
 **运行结果**
 
-<img src="/images/post/matlab_plot/set.png" width="100%" alt="matlab.png"   style="center" style="width: 50%; height: auto;">
+<img src="/images/post/matlab_plot/set.png" width="100%" alt="matlab.png"   style="center" style="width: auto; height: auto;">
 
 > **💡 提示**：`set(gca, 'XTick', ...)` 设置刻度位置，`set(gca, 'XTickLabel', ...)` 可以自定义刻度上的文字标签。
 

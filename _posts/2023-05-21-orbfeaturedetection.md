@@ -2,6 +2,7 @@
 layout: post
 title: "orb特征点"
 categories: cv
+tags: [cv, ORB特征点]
 description: "orb slam 中orb角点的提取和匹配"
 keywords:   fast角点 orb特征点 BRIEF描述子  灰度质心定义 特征匹配
 ---

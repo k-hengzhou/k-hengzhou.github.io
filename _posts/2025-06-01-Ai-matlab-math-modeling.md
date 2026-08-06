@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "AI 编程助手完全指南"
-categories: ai 数学建模
+categories: ai
+tags: [AI, 编程助手]
 description: "本文将带你了解三款主流 AI 编程助手：GitHub Copilot、Cursor 和 Cline，帮助你选择最适合的工具"
 keywords: vscode copilot, Cline+deepseek ,ai,建模
 mermaid: false

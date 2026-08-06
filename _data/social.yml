@@ -1,0 +1,14 @@
+# 联系方式模板（社交账号列表）
+#
+# 说明：此文件用于在「关于」页面的「联系」部分展示社交账号。
+# 每项包含三个字段：
+#   - sitename：平台名称（如：知乎、Bilibili、微博）
+#   - name：    你在该平台的账号名
+#   - url：     你的主页链接
+#
+# 示例（取消注释即可启用）：
+- sitename: 知乎
+  name: khzz
+  url: https://www.zhihu.com/people/khzz-63
+#
+

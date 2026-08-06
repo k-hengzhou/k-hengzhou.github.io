@@ -2,6 +2,7 @@
 layout: post
 title: "本质矩阵和基础矩阵"
 categories: 视图几何
+tags: [视图几何, 对极几何]
 description: "对极几何基本原理"
 keywords: 对极几何 本质矩阵 基础矩阵 
 ---

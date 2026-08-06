@@ -2,6 +2,7 @@
 layout: post
 title: "单应矩阵"
 categories: 视图几何
+tags: [视图几何, 单应矩阵]
 description: "对极几何基本原理"
 keywords: 
     - 对极几何

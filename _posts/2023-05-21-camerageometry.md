@@ -2,9 +2,10 @@
 layout: post
 title: "针孔和鱼眼模型下的摄像机几何"
 categories: 视图几何
+tags: [视图几何, 相机模型, 鱼眼]
 description: "针孔和鱼眼模型下的摄像机几何"
 keywords: 鱼眼模型 针孔模型 相机内参
-notebook: true
+notebook: false
 ---
 
 <style>

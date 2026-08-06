@@ -1,0 +1,512 @@
+/*
+  Custom notebook-style Markdown theme.
+  Applied to the `.content` container used by Chirpy's post/page layouts.
+  Imported after `_sass/main.scss` in `assets/css/jekyll-theme-chirpy.scss`.
+*/
+
+// === 颜色变量 ===
+$grid-color: #f0f0f5; // 网格线颜色
+$bg-color: #ffffff; // 背景底色
+$text-color: #333333; // 正文颜色
+$h1-color: #df5a49; // 大标题橘红色
+$quote-bg: #eaf8f8; // 强调框背景色 (浅青色)
+$quote-border: #d2ebeb; // 强调框边框色
+$code-bg: #f4f0fa; // 行内代码背景色 (浅紫色)
+$code-text: #8c72cb; // 行内代码文字色 (紫色)
+$hr-color: #d1badd; // 分割线颜色
+
+// === Markdown 容器样式 ===
+// Chirpy 主题将文章内容包裹在 <article class="px-1"><div class="content"> 中，
+// 这里用 `article .content` 精确定位，避免影响搜索面板等其它 `.content` 区域。
+article .content {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  color: $text-color;
+  line-height: 1.8;
+  font-size: 16px;
+  padding: 40px 20px;
+
+  // 1. 网格笔记本背景效果
+  background-color: $bg-color;
+  background-image:
+    linear-gradient($grid-color 1px, transparent 1px),
+    linear-gradient(90deg, $grid-color 1px, transparent 1px);
+  background-size: 20px 20px; // 方格的大小
+  background-position: center top;
+
+  // 2. 一级标题样式 (对应：📈 MATLAB 绘图基础)
+  h1 {
+    text-align: center;
+    color: $h1-color;
+    font-weight: bold;
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
+  // 3. 二级标题样式 (对应图片中的方框：## 📑 目录)
+  h2 {
+    position: relative;
+    width: fit-content; // 宽度自适应内容
+    margin: 40px auto; // 居中显示
+    padding: 10px 40px; // 内部留白
+    border: 1px solid #222222; // 主方框边框
+    background-color: $bg-color; // 纯白背景，遮盖下方的网格线
+    color: #222222;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    z-index: 1; // 创建层叠上下文，配合 ::before 使用
+
+    // 使用渐变背景绘制左上角和右下角的"十字准星" (纯 CSS 绘制，无需图片)
+    // 四个渐变依次为：左上横线、左上竖线、右下横线、右下竖线
+    background-image:
+      linear-gradient(#222222, #222222), linear-gradient(#222222, #222222),
+      linear-gradient(#222222, #222222), linear-gradient(#222222, #222222);
+    background-size:
+      8px 2px,
+      2px 8px,
+      8px 2px,
+      2px 8px;
+    background-position:
+      left 8px top 11px,
+      left 11px top 8px,
+      right 8px bottom 11px,
+      right 11px bottom 8px;
+    background-repeat: no-repeat;
+
+    // 使用伪元素绘制上下偏移的横线
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -6px 5%; // 上-6px、左右5%、下-6px，形成上下偏移的横线
+      border-top: 1px solid #222222;
+      border-bottom: 1px solid #222222;
+      z-index: -1; // 放在白底背景的下面，就不会穿过文字区域
+    }
+  }
+
+  // 4. 三级及以上标题样式 (下方横线区分标题与正文)
+  h3,
+  h4,
+  h5,
+  h6 {
+    position: relative;
+    color: $text-color;
+    font-weight: bold;
+    margin-top: 2em;
+    margin-bottom: 1.2em;
+    padding-bottom: 0.4em;
+
+    // 标题下方横线：纯蓝色，与正文形成区分
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 2px;
+      background-color: #2b6cb0; // 纯蓝色
+    }
+  }
+
+  // 5. 强调区块 (对应浅青色卡片，重写普通 blockquote 样式)
+  //    注意：主题内置的 prompt-* 提示框（如 `> [!TIP]` 转换来的 `blockquote.prompt-tip`）
+  //    通过 `:not([class^='prompt-'])` 排除，保留其原有的彩色卡片样式，不会互相干扰。
+  blockquote:not([class^='prompt-']) {
+    background-color: $quote-bg;
+    border: 1px solid $quote-border;
+    border-left: 1px solid $quote-border; // 移除默认的左侧粗边框
+    border-radius: 6px;
+    padding: 20px 25px;
+    margin: 25px 0;
+    color: $text-color;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02); // 轻微阴影增加立体感
+
+    p {
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  // 6. 行内代码样式 (对应：plot、bar、scatter)
+  code {
+    background-color: $code-bg;
+    color: $code-text;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, 'Courier New', monospace;
+    font-size: 0.9em;
+    margin: 0 2px;
+  }
+
+  // 代码块 (防止行内代码样式污染整个代码块)
+  pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+  }
+
+  // 7. 分割线 (对应浅紫色线条)
+  hr {
+    border: none;
+    border-top: 2px solid $hr-color;
+    margin: 30px 0;
+    opacity: 0.7;
+  }
+
+  // 7.5 Markdown 表格样式 (增强边框对比度，避免与笔记本网格背景混淆)
+  // 主题默认边框色 #eaeaea 太浅，这里统一改为更清晰的深灰色边框 + 表头底色
+  // 注意：只匹配 `.table-wrapper > table` (Markdown 表格由 Liquid 包裹)，
+  //       绝不能使用宽泛的 `table` 选择器，否则会污染代码框内部的 rouge-table，
+  //       破坏 atom-one-dark 深色代码框样式！
+  .table-wrapper > table {
+    width: 100%;
+    margin: 25px 0;
+    border-spacing: 0;
+    border-collapse: separate;
+    background-color: $bg-color; // 纯白背景遮盖网格线
+    border: 1px solid #b0b0b8;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.95em;
+
+    thead {
+      border-bottom: 2px solid #9a9aa5;
+
+      th {
+        padding: 12px 16px;
+        background-color: #eef0f3; // 表头浅灰底色
+        border-bottom: 2px solid #b0b0b8;
+        border-right: 1px solid #d4d4dc;
+        color: #2a2a2a;
+        font-weight: 600;
+        text-align: left;
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #d0d0d8;
+
+        &:nth-child(2n) {
+          background-color: #f7f8fa; // 偶数行浅灰
+        }
+
+        &:nth-child(2n + 1) {
+          background-color: $bg-color; // 奇数行纯白
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        td {
+          padding: 10px 16px;
+          border-bottom: 1px solid #d0d0d8;
+          border-right: 1px solid #e2e2e8;
+
+          &:last-child {
+            border-right: none;
+          }
+        }
+
+        &:last-child td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  // 8. 特殊的"目录"徽章样式 (需要配合 HTML 使用)
+  .custom-toc-box {
+    position: relative;
+    width: fit-content;
+    margin: 40px auto;
+    padding: 10px 40px;
+    border: 1.5px solid #000000;
+    background-color: $bg-color; // 遮盖网格
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+
+    // 上下偏移的黑线
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 5%;
+      width: 90%;
+      height: 1.5px;
+      background-color: #000000;
+    }
+
+    &::before {
+      top: -6px;
+    }
+
+    &::after {
+      bottom: -6px;
+    }
+
+    // 角落的十字准星 (简单模拟)
+    .cross-tl,
+    .cross-br {
+      position: absolute;
+      font-size: 14px;
+      line-height: 1;
+      color: #000000;
+      font-weight: 900;
+    }
+
+    .cross-tl {
+      top: 5px;
+      left: 5px;
+    }
+
+    .cross-br {
+      bottom: 5px;
+      right: 5px;
+    }
+  }
+}
+
+// 9. atom-one-dark 风格代码框 (macOS 红黄绿"交通灯"标题栏)
+//    代码块结构: <div class="language-xxx highlighter-rouge"><div class="code-header">…</div><div class="highlight">…</div></div>
+//    固定为深色代码卡片 (atom-one-dark 配色)，三种显示模式下保持一致。
+@mixin notebook-codebox {
+  position: relative;
+  margin: 1.5rem 0;
+  border: 1px solid #3b4048;
+  border-radius: 10px;
+  background-color: #282c34;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+
+  .code-header {
+    height: 2.5rem;
+    margin: 0;
+    padding: 0 0.75rem;
+    background-color: #21252b;
+    border-bottom: 1px solid #3b4048;
+
+    // iOS 红黄绿交通灯圆点
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      background-color: #ff5f57; // 红
+      box-shadow:
+        18px 0 0 #febc2e,
+        // 黄
+        36px 0 0 #28c840; // 绿
+    }
+
+    // 语言标签居中显示
+    span {
+      flex: 1;
+      margin-left: 0;
+      text-align: center;
+      line-height: 2.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #8a8a8a;
+    }
+
+    button {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+
+  .highlight {
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #282c34; // atom-one-dark 背景
+    color: #abb2bf; // atom-one-dark 正文
+
+    // 行号颜色
+    .lineno {
+      color: #4b5263;
+    }
+
+    // 防止行内代码样式污染代码区
+    code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    // === atom-one-dark 语法高亮配色 ===
+    .w {
+      color: #abb2bf;
+    }
+
+    .err {
+      color: #ff0000;
+      background-color: #800000;
+    }
+
+    .gd {
+      color: #e06c75;
+      background-color: #372c34;
+    }
+
+    .gi {
+      color: #98c379;
+      background-color: #273630;
+    }
+
+    .k,
+    .kd,
+    .kn,
+    .kp,
+    .kr,
+    .kt,
+    .kv {
+      color: #c678dd; // 关键字紫色
+    }
+
+    .kt {
+      color: #e5c07b; // 类型黄色
+    }
+
+    .nb,
+    .bp {
+      color: #e06c75; // 内置函数 / 变量 红色
+    }
+
+    .nc,
+    .nn {
+      color: #e5c07b; // 类名 / 常量 黄色
+    }
+
+    .no,
+    .nl {
+      color: #e5c07b; // 常量 黄色
+    }
+
+    .na,
+    .nv,
+    .vc,
+    .vg,
+    .vi,
+    .vm {
+      color: #e06c75; // 属性名 / 变量 红色
+    }
+
+    .nt {
+      color: #e06c75; // 标签名 红色
+    }
+
+    .sr {
+      color: #56b6c2; // 正则 青色
+    }
+
+    .s,
+    .sa,
+    .sc,
+    .dl,
+    .sd,
+    .s2,
+    .se,
+    .sh,
+    .sx,
+    .s1,
+    .ss {
+      color: #98c379; // 字符串绿色
+    }
+
+    .nd,
+    .nf,
+    .fm {
+      color: #61afef; // 函数名蓝色
+    }
+
+    .kc,
+    .l,
+    .ld,
+    .m,
+    .mb,
+    .mf,
+    .mh,
+    .mi,
+    .il,
+    .mo,
+    .mx,
+    .sb {
+      color: #d19a66; // 数字 / 常量 橙色
+    }
+
+    .ne,
+    .py,
+    .o,
+    .ow {
+      color: #56b6c2; // 操作符青色
+    }
+
+    .p,
+    .pi {
+      color: #abb2bf;
+    }
+
+    .gh,
+    .gu {
+      color: #61afef;
+      font-weight: bold;
+    }
+
+    .c,
+    .ch,
+    .cd,
+    .cm,
+    .cp,
+    .cpf,
+    .c1,
+    .cs {
+      color: #5c6370; // 注释灰色
+      font-style: italic;
+    }
+
+    .ge {
+      color: #abb2bf;
+      font-style: italic;
+    }
+
+    .gs {
+      color: #abb2bf;
+      font-weight: bold;
+    }
+
+    .gp,
+    .ni,
+    .si {
+      color: #abb2bf;
+    }
+  }
+}
+
+// 浅色模式（默认）
+article .content div[class^='language-'] {
+  @include notebook-codebox;
+}
+
+// 显式深色模式 (html[data-mode='dark'])
+html[data-mode='dark'] article .content div[class^='language-'] {
+  @include notebook-codebox;
+}
+
+// 跟随系统暗色偏好 (html 无 data-mode，prefers-color-scheme: dark)
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) article .content div[class^='language-'] {
+    @include notebook-codebox;
+  }
+}

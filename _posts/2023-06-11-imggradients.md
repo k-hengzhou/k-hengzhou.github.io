@@ -2,6 +2,7 @@
 layout: post
 title: "灰度图像导数计算"
 categories: cv
+tags: [cv, 图像梯度]
 description: "灰度图像导数计算"
 keywords:  雅可比 导数
 ---
