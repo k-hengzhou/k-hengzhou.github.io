@@ -50,8 +50,6 @@
         @extend %muted;
 
         p {
-          @extend %text-clip;
-
           line-height: 1.5;
           margin: 0;
         }
