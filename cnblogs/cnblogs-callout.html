@@ -1,0 +1,128 @@
+<!--
+  ==========================================================================
+  博客园 GitHub 风格提示框转换脚本（页脚HTML版 v2）
+  --------------------------------------------------------------------------
+  用途：让博客园 Markdown 支持 `> [!NOTE]` / `> [!TIP]` / `> [!IMPORTANT]`
+        / `> [!WARNING]` / `> [!CAUTION]` 语法。
+
+  使用方法：把【本文件全部内容】原样粘贴到
+       博客园后台 → 管理 → 设置 → 页脚HTML代码 → 保存。
+
+  注意：
+   1. 本文件已包含 <script> 标签，是完整的 HTML，可直接粘贴。
+      千万别只复制里面的 JS 代码（不带 <script> 标签）——博客园的 HTML
+      校验器会把 JS 里的字符当成不完整标签解析，报「无效字符」错误。
+   2. 若「页脚HTML代码」提示需要 JS 权限，请联系博客园团队开通
+      （后台设置页有入口，或发邮件至 admin@cnblogs.com）。
+
+  配套样式：见 cnblogs-notebook-theme.css 第 12 节（.callout-* 五色配色）
+      及第 12.5 节（markdown-alert / alert 原生渲染兼容）。
+
+  工作原理（v2 增强）：
+   ① 博客园 Markdown 引擎默认把 `> [!IMPORTANT]` 渲染成普通 blockquote，
+      标记文字保留。脚本扫描 #cnblogs_post_body 内所有 blockquote，
+      识别首行 `[!XXX]` 或加粗 `**XXX**`（即 <strong>XXX</strong>）后，
+      自动加上 callout-xxx 类并清除标记文字；
+   ② 如果博客园已原生渲染成 markdown-alert / alert 结构，脚本会跳过
+      （CSS 第 12.5 节负责上色），不会重复处理；
+   ③ 带多次延迟重试，兼容博客园异步渲染内容的情况。
+  ==========================================================================
+-->
+<script>
+  (function () {
+    'use strict';
+
+    var TYPE_MAP = {
+      note: 'note',
+      info: 'note',
+      tip: 'tip',
+      important: 'important',
+      warning: 'warning',
+      caution: 'caution',
+      danger: 'caution',
+      error: 'caution'
+    };
+
+    var KEY = '(NOTE|INFO|TIP|IMPORTANT|WARNING|CAUTION|DANGER|ERROR)';
+    var FLAG_TEXT_RE = new RegExp('^\\s*\\[!' + KEY + '\\]\\s*', 'i');
+    var STRONG_ONLY_RE = new RegExp('^\\[?' + KEY + '\\]?$', 'i');
+
+    // 已由本脚本或博客园原生渲染的提示框，跳过
+    function alreadyStyled(bq) {
+      return /callout|markdown-alert|\balert\b/i.test(bq.className || '');
+    }
+
+    function stripFromHtml(html, typeKey) {
+      return html.replace(new RegExp('^\\s*(\\[!' + KEY + '\\]|\\*\\*\\s*' + KEY + '\\s*\\*\\*)\\s*', 'i'), '');
+    }
+
+    // 识别并处理单个引用块，返回是否处理成功
+    function fixOne(bq) {
+      if (alreadyStyled(bq)) {
+        return false;
+      }
+
+      var firstP = bq.querySelector('p');
+      if (!firstP) {
+        return false;
+      }
+
+      // 方案 A：首行是加粗标记（<strong>IMPORTANT</strong> 或 <strong>[!IMPORTANT]</strong>）
+      var strong = firstP.querySelector('strong');
+      if (strong) {
+        var st = (strong.textContent || '').trim();
+        var sm = st.match(STRONG_ONLY_RE);
+        if (sm && TYPE_MAP[sm[1].toLowerCase()]) {
+          bq.classList.add('callout-' + TYPE_MAP[sm[1].toLowerCase()]);
+          firstP.removeChild(strong); // 删除加粗标记，保留剩余内容
+          return true;
+        }
+      }
+
+      // 方案 B：首行是纯文本标记（[!IMPORTANT] 文字…）
+      var text = firstP.textContent || '';
+      var tm = text.match(FLAG_TEXT_RE);
+      if (tm && TYPE_MAP[tm[1].toLowerCase()]) {
+        bq.classList.add('callout-' + TYPE_MAP[tm[1].toLowerCase()]);
+        firstP.innerHTML = stripFromHtml(firstP.innerHTML, tm[1]);
+        return true;
+      }
+
+      return false;
+    }
+
+    function fixAll() {
+      var root = document.getElementById('cnblogs_post_body') || document;
+      var blocks = root.querySelectorAll('blockquote');
+      var changed = 0;
+      for (var i = 0; i < blocks.length; i++) {
+        if (fixOne(blocks[i])) {
+          changed++;
+        }
+      }
+      return changed;
+    }
+
+    function run() {
+      try {
+        fixAll();
+      } catch (e) {
+        // 忽略异常，不影响页面
+      }
+    }
+
+    // DOM 就绪后执行；若内容异步加载，做多次延迟重试
+    function schedule() {
+      run();
+      setTimeout(run, 500);
+      setTimeout(run, 1500);
+      setTimeout(run, 3000);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', schedule);
+    } else {
+      schedule();
+    }
+  })();
+</script>

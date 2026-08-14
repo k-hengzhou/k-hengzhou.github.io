@@ -1,0 +1,626 @@
+/* ==========================================================================
+   博客园「笔记本风格」主题 CSS
+   --------------------------------------------------------------------------
+   来源：适配自 k-hengzhou.github.io 的 _sass/custom-notebook.scss
+
+   使用方法（3 步）：
+     1. 博客园后台 → 管理 → 设置 → 页面定制CSS代码 → 粘贴本文件全部内容 → 保存
+     2. 写文章时，在每个 Markdown 代码块【前面】插入一行标题栏 HTML：
+            <div class="cn-codebar" data-lang="matlab"></div>
+        （data-lang 的值会显示在标题栏中间，如 matlab / python / cpp）
+     3. 发表后即可看到效果。
+        - 没加标题栏 HTML 的旧代码块：仍有深色背景 + 左上角红黄绿圆点
+        - 加了标题栏的代码块：圆点 + 居中语言标签 + 无缝衔接的标题栏
+
+   配套文档见：cnblogs/cnblogs-notebook-guide.md
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. 配色备忘（博客园后台是纯 CSS，无法定义变量，直接以注释记录）
+   --------------------------------------------------------------------------
+   网格线 #f0f0f5     背景 #ffffff     正文 #333333
+   一级标题橘红 #df5a49                 二级标题方框线 #222222
+   强调框背景 #eaf8f8  强调框边框 #d2ebeb
+   行内代码背景 #f4f0fa  行内代码文字 #8c72cb
+   分割线 #d1badd      三级标题下划线 #2b6cb0
+   代码块背景 #282c34 (atom-one-dark)  代码块顶栏 #21252b
+   交通灯：红 #ff5f57 黄 #febc2e 绿 #28c840
+   -------------------------------------------------------------------------- */
+
+/* ---------- 1. 文章容器：网格笔记本背景 ---------- */
+#cnblogs_post_body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  color: #333333;
+  line-height: 1.8;
+  font-size: 16px;
+  padding: 40px 20px;
+
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(#f0f0f5 1px, transparent 1px),
+    linear-gradient(90deg, #f0f0f5 1px, transparent 1px);
+  background-size: 20px 20px; /* 方格大小 */
+  background-position: center top;
+}
+
+/* ---------- 2. 一级标题：橘红色居中 ---------- */
+#cnblogs_post_body h1 {
+  text-align: center;
+  color: #df5a49;
+  font-weight: bold;
+  font-size: 1.9em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  border: none;
+}
+
+/* ---------- 3. 二级标题：方框 + 四角十字准星 ---------- */
+#cnblogs_post_body h2 {
+  position: relative;
+  width: fit-content;
+  margin: 40px auto;
+  padding: 10px 40px;
+  border: 1px solid #222222;
+  background-color: #ffffff; /* 纯白背景遮盖网格线 */
+  color: #222222;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+  z-index: 1; /* 创建层叠上下文，配合 ::before */
+
+  /* 四个渐变依次绘制：左上横线、左上竖线、右下横线、右下竖线 */
+  background-image:
+    linear-gradient(#222222, #222222), linear-gradient(#222222, #222222),
+    linear-gradient(#222222, #222222), linear-gradient(#222222, #222222);
+  background-size:
+    8px 2px,
+    2px 8px,
+    8px 2px,
+    2px 8px;
+  background-position:
+    left 8px top 11px,
+    left 11px top 8px,
+    right 8px bottom 11px,
+    right 11px bottom 8px;
+  background-repeat: no-repeat;
+}
+
+/* 上下偏移的横线 */
+#cnblogs_post_body h2::before {
+  content: '';
+  position: absolute;
+  inset: -6px 5%;
+  border-top: 1px solid #222222;
+  border-bottom: 1px solid #222222;
+  z-index: -1; /* 放在白底背景下面，不穿过文字 */
+}
+
+/* ---------- 4. 三级及以上标题：下方蓝色横线 ---------- */
+#cnblogs_post_body h3,
+#cnblogs_post_body h4,
+#cnblogs_post_body h5,
+#cnblogs_post_body h6 {
+  position: relative;
+  color: #333333;
+  font-weight: bold;
+  margin-top: 2em;
+  margin-bottom: 1.2em;
+  padding-bottom: 0.4em;
+  border: none;
+}
+
+#cnblogs_post_body h3::after,
+#cnblogs_post_body h4::after,
+#cnblogs_post_body h5::after,
+#cnblogs_post_body h6::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #2b6cb0;
+}
+
+/* ---------- 5. 引用块 / 强调框：浅青色卡片 ---------- */
+/* 只匹配「无 class」的纯引用块；带 class 的（原生 alert / callout 等）
+   会走各自专门的彩色样式，不会被这里的浅青色卡片覆盖。 */
+#cnblogs_post_body blockquote:not([class]) {
+  background-color: #eaf8f8;
+  border: 1px solid #d2ebeb;
+  border-left: 1px solid #d2ebeb; /* 移除默认左侧粗边框 */
+  border-radius: 6px;
+  padding: 20px 25px;
+  margin: 25px 0;
+  color: #333333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+#cnblogs_post_body blockquote:not([class]) p {
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- 6. 行内代码：浅紫底紫字 ---------- */
+#cnblogs_post_body code {
+  background-color: #f4f0fa;
+  color: #8c72cb;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 0.9em;
+  margin: 0 2px;
+}
+
+/* ---------- 7. 分割线：浅紫色 ---------- */
+#cnblogs_post_body hr {
+  border: none;
+  border-top: 2px solid #d1badd;
+  margin: 30px 0;
+  opacity: 0.7;
+}
+
+/* ---------- 7.5 Markdown 表格：清晰深灰边框 + 斑马纹 ---------- */
+#cnblogs_post_body table {
+  width: 100%;
+  margin: 25px 0;
+  border-spacing: 0;
+  border-collapse: separate;
+  background-color: #ffffff; /* 遮盖网格线 */
+  border: 1px solid #b0b0b8;
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 0.95em;
+}
+
+#cnblogs_post_body table thead {
+  border-bottom: 2px solid #9a9aa5;
+}
+
+#cnblogs_post_body table th {
+  padding: 12px 16px;
+  background-color: #eef0f3;
+  border-bottom: 2px solid #b0b0b8;
+  border-right: 1px solid #d4d4dc;
+  color: #2a2a2a;
+  font-weight: 600;
+  text-align: left;
+}
+
+#cnblogs_post_body table th:last-child {
+  border-right: none;
+}
+
+#cnblogs_post_body table tbody tr {
+  border-bottom: 1px solid #d0d0d8;
+}
+
+#cnblogs_post_body table tbody tr:nth-child(2n) {
+  background-color: #f7f8fa;
+}
+
+#cnblogs_post_body table tbody tr:nth-child(2n + 1) {
+  background-color: #ffffff;
+}
+
+#cnblogs_post_body table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid #d0d0d8;
+  border-right: 1px solid #e2e2e8;
+}
+
+#cnblogs_post_body table td:last-child {
+  border-right: none;
+}
+
+#cnblogs_post_body table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------
+   8. 代码块：深色卡片 (atom-one-dark)
+   --------------------------------------------------------------------------
+   博客园 Markdown 的代码块结构：
+     <pre class="cn-code"><code class="language-matlab hljs">…</code></pre>
+   这里用 `#cnblogs_post_body pre` 做兜底，兼容 cn-code 等各种结构。
+   -------------------------------------------------------------------------- */
+#cnblogs_post_body pre {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 50px 16px 16px 16px; /* 顶部留白给圆点 */
+  border: 1px solid #3b4048;
+  border-radius: 10px;
+  background-color: #282c34;
+  color: #abb2bf;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  overflow-x: auto;
+  line-height: 1.6;
+  font-size: 0.95em;
+}
+
+/* 没有标题栏时：左上角红黄绿交通灯圆点 */
+#cnblogs_post_body pre::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ff5f57; /* 红 */
+  box-shadow:
+    18px 0 0 #febc2e,
+    /* 黄 */ 36px 0 0 #28c840; /* 绿 */
+  z-index: 1;
+}
+
+/* 代码块内部 code：重置行内代码的浅紫样式，避免污染 */
+#cnblogs_post_body pre code {
+  background-color: transparent;
+  color: #abb2bf;
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+}
+
+/* --------------------------------------------------------------------------
+   9. 代码块标题栏：交通灯 + 居中语言标签
+   --------------------------------------------------------------------------
+   用法：在每个 Markdown 代码块【前一行】插入：
+       <div class="cn-codebar" data-lang="matlab"></div>
+   与紧随其后的 <pre> 无缝衔接成一个整体。
+   -------------------------------------------------------------------------- */
+#cnblogs_post_body .cn-codebar {
+  position: relative;
+  height: 40px;
+  margin: 1.5rem 0 0 0;
+  padding: 0;
+  background-color: #21252b;
+  border: 1px solid #3b4048;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  box-sizing: border-box;
+}
+
+/* 交通灯圆点 */
+#cnblogs_post_body .cn-codebar::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ff5f57; /* 红 */
+  box-shadow:
+    18px 0 0 #febc2e,
+    /* 黄 */ 36px 0 0 #28c840; /* 绿 */
+}
+
+/* 居中语言标签（读取 data-lang 属性） */
+#cnblogs_post_body .cn-codebar::after {
+  content: attr(data-lang);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #8a8a8a;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* 有标题栏时：代码块上移衔接、隐藏自带圆点、恢复常规内边距 */
+#cnblogs_post_body .cn-codebar ~ pre {
+  margin-top: 0;
+  border-radius: 0 0 10px 10px;
+  padding-top: 16px;
+}
+
+#cnblogs_post_body .cn-codebar ~ pre::before {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   10. 代码语法高亮：atom-one-dark 配色 (highlight.js)
+   --------------------------------------------------------------------------
+   博客园 Markdown 使用 highlight.js，token 类名为 .hljs-keyword 等。
+   选择器均带 `#cnblogs_post_body pre` 前缀，确保优先级高于
+   博客园主题自带的浅色高亮配色，且不影响行内代码。
+   -------------------------------------------------------------------------- */
+#cnblogs_post_body pre .hljs {
+  color: #abb2bf;
+  background: transparent;
+}
+
+#cnblogs_post_body pre .hljs-comment,
+#cnblogs_post_body pre .hljs-quote {
+  color: #5c6370; /* 注释灰色 */
+  font-style: italic;
+}
+
+#cnblogs_post_body pre .hljs-doctag,
+#cnblogs_post_body pre .hljs-keyword,
+#cnblogs_post_body pre .hljs-formula {
+  color: #c678dd; /* 关键字紫色 */
+}
+
+#cnblogs_post_body pre .hljs-section,
+#cnblogs_post_body pre .hljs-name,
+#cnblogs_post_body pre .hljs-selector-tag,
+#cnblogs_post_body pre .hljs-deletion,
+#cnblogs_post_body pre .hljs-subst {
+  color: #e06c75; /* 标签名 / 删除 红色 */
+}
+
+#cnblogs_post_body pre .hljs-literal {
+  color: #56b6c2; /* 字面量青色 */
+}
+
+#cnblogs_post_body pre .hljs-string,
+#cnblogs_post_body pre .hljs-regexp,
+#cnblogs_post_body pre .hljs-addition,
+#cnblogs_post_body pre .hljs-attribute,
+#cnblogs_post_body pre .hljs-meta .hljs-string {
+  color: #98c379; /* 字符串绿色 */
+}
+
+#cnblogs_post_body pre .hljs-attr,
+#cnblogs_post_body pre .hljs-variable,
+#cnblogs_post_body pre .hljs-template-variable,
+#cnblogs_post_body pre .hljs-type,
+#cnblogs_post_body pre .hljs-selector-class,
+#cnblogs_post_body pre .hljs-selector-attr,
+#cnblogs_post_body pre .hljs-selector-pseudo,
+#cnblogs_post_body pre .hljs-number {
+  color: #d19a66; /* 数字 / 变量 橙色 */
+}
+
+#cnblogs_post_body pre .hljs-symbol,
+#cnblogs_post_body pre .hljs-bullet,
+#cnblogs_post_body pre .hljs-link,
+#cnblogs_post_body pre .hljs-meta,
+#cnblogs_post_body pre .hljs-selector-id,
+#cnblogs_post_body pre .hljs-title {
+  color: #61afef; /* 函数名 / 标题 蓝色 */
+}
+
+#cnblogs_post_body pre .hljs-built_in,
+#cnblogs_post_body pre .hljs-title.class_,
+#cnblogs_post_body pre .hljs-class .hljs-title {
+  color: #e5c07b; /* 内置函数 / 类名 黄色 */
+}
+
+#cnblogs_post_body pre .hljs-emphasis {
+  font-style: italic;
+}
+
+#cnblogs_post_body pre .hljs-strong {
+  font-weight: bold;
+}
+
+#cnblogs_post_body pre .hljs-link {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   11. 可选：目录徽章样式（手动 HTML 场景）
+   --------------------------------------------------------------------------
+   如果你希望像 Jekyll 版那样用 HTML 手写居中徽章，可用：
+       <div class="custom-toc-box">📑 目录</div>
+   -------------------------------------------------------------------------- */
+#cnblogs_post_body .custom-toc-box {
+  position: relative;
+  width: fit-content;
+  margin: 40px auto;
+  padding: 10px 40px;
+  border: 1.5px solid #000000;
+  background-color: #ffffff;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#cnblogs_post_body .custom-toc-box::before,
+#cnblogs_post_body .custom-toc-box::after {
+  content: '';
+  position: absolute;
+  left: 5%;
+  width: 90%;
+  height: 1.5px;
+  background-color: #000000;
+}
+
+#cnblogs_post_body .custom-toc-box::before {
+  top: -6px;
+}
+
+#cnblogs_post_body .custom-toc-box::after {
+  bottom: -6px;
+}
+
+/* --------------------------------------------------------------------------
+   12. GitHub 风格提示框 (支持 > [!NOTE] 等语法)
+   --------------------------------------------------------------------------
+   配合 `cnblogs-callout.js` 使用：JS 扫描 .postBody 里的 blockquote，
+   检测首行 [!NOTE]/[!TIP]/[!IMPORTANT]/[!WARNING]/[!CAUTION] 后自动加上
+   callout-* 类并清除标记文字，这里为五类提示框提供 GitHub 官方配色。
+   (class 含 callout 的引用已被第 5 节的 :not([class*='callout']) 排除，
+   所以下方的提示框卡片与笔记本引用卡片互不干扰。)
+   -------------------------------------------------------------------------- */
+#cnblogs_post_body blockquote.callout-note,
+#cnblogs_post_body blockquote.callout-tip,
+#cnblogs_post_body blockquote.callout-important,
+#cnblogs_post_body blockquote.callout-warning,
+#cnblogs_post_body blockquote.callout-caution {
+  position: relative;
+  margin: 20px 0;
+  padding: 14px 20px 14px 48px; /* 左侧留白给 emoji 图标 */
+  border-radius: 6px;
+  border: 1px solid transparent;
+  border-left: 4px solid; /* GitHub 风格左侧粗边 */
+  box-shadow: none;
+  color: #333333;
+}
+
+/* 左侧 emoji 图标 */
+#cnblogs_post_body blockquote.callout-note::before,
+#cnblogs_post_body blockquote.callout-tip::before,
+#cnblogs_post_body blockquote.callout-important::before,
+#cnblogs_post_body blockquote.callout-warning::before,
+#cnblogs_post_body blockquote.callout-caution::before {
+  position: absolute;
+  left: 15px;
+  top: 14px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+/* 段落重置（覆盖第 5 节的引用卡片段落样式） */
+#cnblogs_post_body blockquote.callout-note p,
+#cnblogs_post_body blockquote.callout-tip p,
+#cnblogs_post_body blockquote.callout-important p,
+#cnblogs_post_body blockquote.callout-warning p,
+#cnblogs_post_body blockquote.callout-caution p {
+  margin: 0;
+  letter-spacing: normal;
+}
+
+#cnblogs_post_body blockquote.callout-note p + p,
+#cnblogs_post_body blockquote.callout-tip p + p,
+#cnblogs_post_body blockquote.callout-important p + p,
+#cnblogs_post_body blockquote.callout-warning p + p,
+#cnblogs_post_body blockquote.callout-caution p + p {
+  margin-top: 8px;
+}
+
+/* —— 五种官方配色 —— */
+#cnblogs_post_body blockquote.callout-note {
+  background-color: #ddf4ff;
+  border-color: rgba(9, 105, 218, 0.3);
+  border-left-color: #0969da;
+}
+#cnblogs_post_body blockquote.callout-note::before {
+  content: 'ℹ️';
+}
+
+#cnblogs_post_body blockquote.callout-tip {
+  background-color: #dafbe1;
+  border-color: rgba(26, 127, 55, 0.3);
+  border-left-color: #1a7f37;
+}
+#cnblogs_post_body blockquote.callout-tip::before {
+  content: '💡';
+}
+
+#cnblogs_post_body blockquote.callout-important {
+  background-color: #fbefff;
+  border-color: rgba(130, 80, 223, 0.3);
+  border-left-color: #8250df;
+}
+#cnblogs_post_body blockquote.callout-important::before {
+  content: '❗';
+}
+
+#cnblogs_post_body blockquote.callout-warning {
+  background-color: #fff8c5;
+  border-color: rgba(154, 103, 0, 0.3);
+  border-left-color: #9a6700;
+}
+#cnblogs_post_body blockquote.callout-warning::before {
+  content: '⚠️';
+}
+
+#cnblogs_post_body blockquote.callout-caution {
+  background-color: #ffebe9;
+  border-color: rgba(207, 34, 46, 0.3);
+  border-left-color: #cf222e;
+}
+#cnblogs_post_body blockquote.callout-caution::before {
+  content: '🔥';
+}
+
+/* --------------------------------------------------------------------------
+   12.5 博客园新版 Markdown / 编辑器原生渲染的提示框兼容
+   --------------------------------------------------------------------------
+   部分博客园环境会把 `> [!IMPORTANT]` 直接渲染成带 class 的结构（不需要
+   JS 处理），常见的几种类名方案：
+     ① GitHub 新版： <div class="markdown-alert markdown-alert-important">
+        <p class="markdown-alert-title">Important</p> ...
+     ② 旧版/GitHub老样式：<blockquote class="alert alert-important"> ...
+   注意：新版 GitHub 用的是 <div> 而非 <blockquote>，因此这里用纯类选择器
+   （不限定标签名），div / blockquote 都能匹配。
+   -------------------------------------------------------------------------- */
+#cnblogs_post_body .markdown-alert,
+#cnblogs_post_body .alert {
+  position: relative;
+  margin: 20px 0;
+  padding: 14px 20px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  border-left: 4px solid;
+  box-shadow: none;
+  color: #333333;
+}
+
+/* 标题行加粗 */
+#cnblogs_post_body .markdown-alert .markdown-alert-title,
+#cnblogs_post_body .alert .alert-title,
+#cnblogs_post_body .markdown-alert p:first-child,
+#cnblogs_post_body .alert p:first-child {
+  font-weight: 700;
+  color: #222222;
+  margin-top: 0;
+}
+
+#cnblogs_post_body .markdown-alert p,
+#cnblogs_post_body .alert p {
+  margin: 0;
+  letter-spacing: normal;
+}
+
+#cnblogs_post_body .markdown-alert p + p,
+#cnblogs_post_body .alert p + p {
+  margin-top: 8px;
+}
+
+/* 五色配色 */
+#cnblogs_post_body .markdown-alert-note,
+#cnblogs_post_body .alert-note {
+  background-color: #ddf4ff;
+  border-color: rgba(9, 105, 218, 0.3);
+  border-left-color: #0969da;
+}
+#cnblogs_post_body .markdown-alert-tip,
+#cnblogs_post_body .alert-tip {
+  background-color: #dafbe1;
+  border-color: rgba(26, 127, 55, 0.3);
+  border-left-color: #1a7f37;
+}
+#cnblogs_post_body .markdown-alert-important,
+#cnblogs_post_body .alert-important {
+  background-color: #fbefff;
+  border-color: rgba(130, 80, 223, 0.3);
+  border-left-color: #8250df;
+}
+#cnblogs_post_body .markdown-alert-warning,
+#cnblogs_post_body .alert-warning {
+  background-color: #fff8c5;
+  border-color: rgba(154, 103, 0, 0.3);
+  border-left-color: #9a6700;
+}
+#cnblogs_post_body .markdown-alert-caution,
+#cnblogs_post_body .alert-caution {
+  background-color: #ffebe9;
+  border-color: rgba(207, 34, 46, 0.3);
+  border-left-color: #cf222e;
+}
+
+/* --------------------------------------------------------------------------
