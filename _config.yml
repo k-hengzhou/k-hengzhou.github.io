@@ -14,7 +14,7 @@ timezone: Asia/Shanghai
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: k-hz # the main title
+title: k-hz(majorArcs) # the main title
 
 tagline: 你可以在这里发现有意思的数学 # it will display as the sub-title
 
@@ -43,13 +43,16 @@ social:
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
-# google_site_verification: # fill in to your verification string
+# 注意：Google 站点验证已直接嵌入 _includes/head.html，无需在此填写。
+# 若在此填写，jekyll-seo-tag 插件会重复输出相同的 meta 标签。
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
 
+# ⚠️ 不要填写！GA 代码已直接嵌入 _includes/head.html。
+# 若在此填写 id，生产环境下会与 head.html 中的代码重复加载（每个页面会出现两个 Google 代码）。
 google_analytics:
-  id: # fill in your Google Analytics ID
+  id: # DO NOT fill in! GA snippet is hardcoded in _includes/head.html
 
 goatcounter:
   id: https://khz.goatcounter.com/
@@ -171,6 +174,23 @@ defaults:
       path: assets/js/dist
     values:
       swcache: true
+  - scope:
+      path: cnblogs # 博客园辅助文件，无需被搜索引擎收录
+    values:
+      sitemap: false
+  - scope:
+      path: _post_backup # 备份文章目录
+    values:
+      sitemap: false
+      published: false
+  - scope:
+      path: "097683-01.pdf" # 教学资料，无需被搜索引擎单独收录
+    values:
+      sitemap: false
+  - scope:
+      path: "matlab_tut.pdf"
+    values:
+      sitemap: false
 
 sass:
   style: compressed
@@ -202,12 +222,11 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
-gem:
+plugins:
   - jekyll-archives
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-feed
-  - jekyll-paginate-v2
+  - jekyll-paginate
   - kramdown-parser-gfm
   - kramdown
   - jekyll-redirect-from

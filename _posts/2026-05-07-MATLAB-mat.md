@@ -3,15 +3,10 @@ layout: post
 title: "MATLAB 向量与矩阵二：矩阵"
 categories: matlab
 tags: [MATLAB, 矩阵]
-description: "本文将详细介绍 MATLAB 中矩阵的创建、引用与运算，包括特殊矩阵生成、索引与修改、矩阵运算、转置、连接、隐式扩展、行列式与逆矩阵、特征值、线性方程组求解、逻辑索引等，帮助你快速掌握 MATLAB 矩阵编程基础"
+description: "面向理工科学生与 MATLAB 学习者的矩阵编程必修课：从矩阵创建、索引与修改，到矩阵与元素级运算、转置、连接、隐式扩展，再到行列式、逆矩阵、特征值、线性方程组求解与逻辑索引筛选，配大量实战示例助你彻底掌握 MATLAB 矩阵操作"
 
-keywords: matlab, 矩阵, 矩阵运算, 特殊矩阵, 行列式, 逆矩阵, 特征值, 线性方程组
+keywords: matlab,  矩阵运算
 mermaid: false
-sequence: false
-flow: false
-mathjax: true
-mindmap: false
-mindmap2: false
 ---
 
 # 🧮 向量和矩阵：矩阵

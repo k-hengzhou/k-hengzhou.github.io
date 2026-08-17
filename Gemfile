@@ -4,6 +4,9 @@ source "https://rubygems.org"
 
 gemspec
 
+# Plugins declared in `_config.yml` that are not provided by the theme gem
+gem "jekyll-mermaid", "~> 1.0"
+
 group :test do
   gem "html-proofer", "~> 4.4"
 end

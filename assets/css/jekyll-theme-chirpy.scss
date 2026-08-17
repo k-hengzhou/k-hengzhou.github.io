@@ -5,3 +5,9 @@
 @import 'custom-notebook';
 
 /* append your custom style below */
+
+/* 移动端顶栏首页标题：允许两行显示（默认 nowrap 会裁剪） */
+#topbar-title.home-title {
+  white-space: normal;
+  line-height: 1.2;
+}

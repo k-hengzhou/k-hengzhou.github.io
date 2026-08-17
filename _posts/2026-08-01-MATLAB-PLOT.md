@@ -3,14 +3,9 @@ layout: post
 title: "MATLAB 绘图基础"
 categories: matlab
 tags: [MATLAB, 绘图]
-description: "本文将详细介绍 MATLAB 中的绘图功能，包括基本绘图、曲线样式定制、图形标注与坐标轴控制、常用数据图（条形图、散点图、茎叶图、饼图、直方图、误差棒图、箱线图等）、子图布局与图形保存导出等，帮助你系统掌握 MATLAB 数据可视化"
-keywords: matlab, 绘图, plot, 数据可视化, 子图, 条形图, 散点图, 茎叶图, 饼图, 直方图, 箱线图, tiledlayout, 保存
+description: "面向 MATLAB 学习者与科研绘图用户的数据可视化教程：从 plot 基本绘图、样式定制与标注，到条形图、散点图、饼图、直方图、误差棒图、箱线图等常用数据图，再到 subplot/tiledlayout 子图布局与图形保存导出，助你系统掌握 MATLAB 绘图"
+keywords: matlab, 绘图
 mermaid: false
-sequence: false
-flow: false
-mathjax: true
-mindmap: false
-mindmap2: false
 ---
 
 # 📈 MATLAB 绘图基础

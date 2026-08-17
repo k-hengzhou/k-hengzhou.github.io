@@ -3,14 +3,9 @@ layout: post
 title: "MATLAB 向量和矩阵一：向量"
 categories: matlab
 tags: [MATLAB, 向量]
-description: "本文将详细介绍 MATLAB 中向量的创建、引用与运算，包括行向量与列向量、向量生成方式、向量运算、常用函数、逻辑运算、向量化编程与内存性能优化，帮助你快速掌握 MATLAB 向量编程基础"
-keywords: matlab, 向量, 行向量, 列向量, 向量运算, 向量化编程, 逻辑运算, 内存性能
+description: "面向 MATLAB 初学者的向量编程入门教程：详解行向量与列向量的创建、索引引用、加减乘除与点积叉积运算、常用统计函数与逻辑运算，并传授向量化编程与内存预分配等性能优化技巧，助你写出高效简洁的 MATLAB 代码"
+keywords: matlab, 向量
 mermaid: false
-sequence: false
-flow: false
-mathjax: true
-mindmap: false
-mindmap2: false
 ---
 
 # 🧮 MATLAB 向量和矩阵：向量
