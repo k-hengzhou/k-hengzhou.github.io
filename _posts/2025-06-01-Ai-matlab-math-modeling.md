@@ -8,8 +8,6 @@ keywords: vscode copilot, Cline+deepseek ,ai,建模
 mermaid: false
 ---
 
-# 🚀 AI 编程助手完全指南
-
 > 本文将带你了解三款主流 AI 编程助手：GitHub Copilot、Cursor 和 Cline，帮助你选择最适合的工具。
 
 ## 🌟 主流 AI 编程助手对比

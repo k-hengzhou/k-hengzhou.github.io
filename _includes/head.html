@@ -61,12 +61,39 @@
 
   {{ seo_tags }}
 
-  <title>
-    {%- unless page.layout == 'home' -%}
-      {{ page.title | append: ' | ' }}
-    {%- endunless -%}
-    {{ site.title }}
-  </title>
+  {%- assign _tagline = site.tagline -%}
+  {%- assign _title_len = page.title | default: site.title | size -%}
+
+  {%- if page.layout == 'home' -%}
+    {%- capture seo_page_title -%}
+      {{- site.title -}}
+      {%- if _tagline -%}
+        {{- ' | ' -}}{{ _tagline }}
+      {%- endif -%}
+    {%- endcapture -%}
+  {%- elsif page.layout == 'post' and _title_len > 25 -%}
+    {%- comment -%}
+      长标题文章不再追加 tagline，避免标题过长被搜索引擎截断
+    {%- endcomment -%}
+    {%- capture seo_page_title -%}
+      {{- page.title | default: site.title -}}
+      {%- if site.title -%}
+        {{- ' | ' -}}{{ site.title }}
+      {%- endif -%}
+    {%- endcapture -%}
+  {%- else -%}
+    {%- capture seo_page_title -%}
+      {{- page.title | default: site.title -}}
+      {%- if site.title -%}
+        {{- ' | ' -}}{{ site.title }}
+      {%- endif -%}
+      {%- if _tagline -%}
+        {{- ' | ' -}}{{ _tagline }}
+      {%- endif -%}
+    {%- endcapture -%}
+  {%- endif -%}
+
+  <title>{{- seo_page_title -}}</title>
 
   {% include_cached favicons.html %}
 

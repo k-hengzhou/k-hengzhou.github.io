@@ -8,8 +8,6 @@ keywords: matlab, 绘图
 mermaid: false
 ---
 
-# 📈 MATLAB 绘图基础
-
 > 绘图是 MATLAB 最强大的功能之一，掌握 `plot`、`bar`、`scatter` 等绘图命令，是 MATLAB 数据可视化与工程分析中不可或缺的一步。
 
 ---

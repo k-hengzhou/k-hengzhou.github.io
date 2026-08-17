@@ -9,8 +9,6 @@ keywords: matlab, M文件, 函数
 mermaid: false
 ---
 
-# 📁 MATLAB M文件与函数
-
 > M 文件是 MATLAB 编程的核心载体，掌握其创建、函数定义与调试技巧，是精通 MATLAB 的关键一步。
 
 ---

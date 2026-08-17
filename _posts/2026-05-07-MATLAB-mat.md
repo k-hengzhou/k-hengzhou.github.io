@@ -9,8 +9,6 @@ keywords: matlab,  矩阵运算
 mermaid: false
 ---
 
-# 🧮 向量和矩阵：矩阵
-
 > 向量和矩阵是 MATLAB 中最核心、最基本的数据结构。MATLAB 的名称本身就源自 **"矩阵实验室"（Matrix Laboratory）**。掌握向量和矩阵的操作，是精通 MATLAB 编程的第一步，也是最重要的一步。
 
 ---
