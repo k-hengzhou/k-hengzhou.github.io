@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "MATLAB 绘图基础"
-categories: matlab
+categories: Matlab入门
 tags: [MATLAB, 绘图]
 description: "面向 MATLAB 学习者与科研绘图用户的数据可视化教程：从 plot 基本绘图、样式定制与标注，到条形图、散点图、饼图、直方图、误差棒图、箱线图等常用数据图，再到 subplot/tiledlayout 子图布局与图形保存导出，助你系统掌握 MATLAB 绘图"
 keywords: matlab, 绘图

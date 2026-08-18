@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MATLAB 数学建模：2024高校社杯C题展示论文双重饼图复现
-categories: 数学建模
+categories: Matlab实战
 tags: [MATLAB, 数学建模, 绘图, 饼图]
 description: "面向 MATLAB 用户与数学建模参赛者的科研绘图实战：以 2024 高教社杯 C 题为例，手把手教你用 readtable 读取含中文列名的 Excel 数据、分组统计面积，并通过嵌套坐标轴与渐变色绘制论文级双重饼图，完整掌握数据可视化进阶技巧"
 keywords: matlab, 数学建模, 双重饼图, 双饼图, pie, readtable, 数据可视化, 绘图, 2024高教社杯

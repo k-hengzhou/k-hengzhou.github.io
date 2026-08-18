@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "MATLAB 向量和矩阵一：向量"
-categories: matlab
+categories: Matlab入门
 tags: [MATLAB, 向量]
 description: "面向 MATLAB 初学者的向量编程入门教程：详解行向量与列向量的创建、索引引用、加减乘除与点积叉积运算、常用统计函数与逻辑运算，并传授向量化编程与内存预分配等性能优化技巧，助你写出高效简洁的 MATLAB 代码"
 keywords: matlab, 向量

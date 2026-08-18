@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "MATLAB 基本语法指南"
-categories: matlab
+categories: Matlab入门
 tags: [MATLAB, 基本语法]
 description: "面向 MATLAB 零基础初学者的语法入门教程：系统讲解环境操作、基础语法、变量与命令、运算符、输入输出与控制结构，配合大量可直接运行的示例，助你快速打下 MATLAB 编程基础"
 keywords: matlab, 基本语法, 变量, 命令, 运算符, 控制结构, 输入输出

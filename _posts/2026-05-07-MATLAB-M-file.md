@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "MATLAB M 文件与函数"
-categories: matlab
+categories: Matlab入门
 tags: [MATLAB, 函数]
 description: "面向 MATLAB 学习者的函数编程进阶指南：详解 M 文件的创建与编辑、脚本与函数文件的区别、函数的定义与调用、匿名函数、可变参数及调试技巧，并给出命名与注释等编程风格规范，助你写出专业可维护的 MATLAB 代码"
 
