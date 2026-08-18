@@ -183,14 +183,6 @@ defaults:
     values:
       sitemap: false
       published: false
-  - scope:
-      path: "097683-01.pdf" # 教学资料，无需被搜索引擎单独收录
-    values:
-      sitemap: false
-  - scope:
-      path: "matlab_tut.pdf"
-    values:
-      sitemap: false
 
 sass:
   style: compressed
