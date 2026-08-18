@@ -10,5 +10,11 @@
 - sitename: 知乎
   name: majorArcs
   url: https://www.zhihu.com/people/khzz-63
+- sitename: CSDN
+  name: majorArcs
+  url: https://blog.csdn.net/qq_17226531?type=blog
+- sitename: 掘金
+  name: "majorArcs"
+  url: https://juejin.cn/user/1026291774796795
 #
 
