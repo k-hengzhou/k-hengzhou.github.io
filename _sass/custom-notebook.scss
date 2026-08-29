@@ -86,11 +86,8 @@ article .content {
     }
   }
 
-  // 4. 三级及以上标题样式 (下方横线区分标题与正文)
-  h3,
-  h4,
-  h5,
-  h6 {
+  // 4. 三级标题样式 (下方横线区分标题与正文)
+  h3 {
     position: relative;
     color: $text-color;
     font-weight: bold;
@@ -109,6 +106,16 @@ article .content {
       border-radius: 2px;
       background-color: #2b6cb0; // 纯蓝色
     }
+  }
+
+  // 4.1 四级及以下标题样式
+  h4,
+  h5,
+  h6 {
+    color: $text-color;
+    font-weight: bold;
+    margin-top: 2em;
+    margin-bottom: 1.2em;
   }
 
   // 5. 强调区块 (对应浅青色卡片，重写普通 blockquote 样式)

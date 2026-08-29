@@ -97,11 +97,8 @@
   z-index: -1; /* 放在白底背景下面，不穿过文字 */
 }
 
-/* ---------- 4. 三级及以上标题：下方蓝色横线 ---------- */
-#cnblogs_post_body h3,
-#cnblogs_post_body h4,
-#cnblogs_post_body h5,
-#cnblogs_post_body h6 {
+/* ---------- 4. 三级标题：下方蓝色横线 ---------- */
+#cnblogs_post_body h3 {
   position: relative;
   color: #333333;
   font-weight: bold;
@@ -111,10 +108,7 @@
   border: none;
 }
 
-#cnblogs_post_body h3::after,
-#cnblogs_post_body h4::after,
-#cnblogs_post_body h5::after,
-#cnblogs_post_body h6::after {
+#cnblogs_post_body h3::after {
   content: '';
   position: absolute;
   left: 0;
@@ -123,6 +117,17 @@
   height: 2px;
   border-radius: 2px;
   background-color: #2b6cb0;
+}
+
+/* ---------- 4.1 四级及以下标题 ---------- */
+#cnblogs_post_body h4,
+#cnblogs_post_body h5,
+#cnblogs_post_body h6 {
+  color: #333333;
+  font-weight: bold;
+  margin-top: 2em;
+  margin-bottom: 1.2em;
+  border: none;
 }
 
 /* ---------- 5. 引用块 / 强调框：浅青色卡片 ---------- */
