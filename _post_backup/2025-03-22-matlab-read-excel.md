@@ -2,7 +2,7 @@
 layout: post
 title: "MATLAB 读取 Excel 文件完全指南"
 categories: matlab excel 数据处理
-description: "本文将详细介绍 MATLAB 读取 Excel 文件的多种方法，包括基本读取、高级选项、数据清洗和实战案例"
+description: "面向 MATLAB 初学者与数据分析爱好者的 Excel 数据处理指南：系统讲解从 xlsread 传统读取、readtable 表格读取、readmatrix 数值矩阵到 readcell 混合数据的多种导入方法，详解缺失值处理、类型转换、表格访问、筛选排序与可视化导出等完整数据处理流程，并通过学生成绩分析实战案例与最佳实践总结，帮你高效完成 Excel 数据的读取、清洗与分析"
 keywords: matlab, excel, xlsread, readtable, readmatrix, 数据导入
 mermaid: false
 sequence: false
